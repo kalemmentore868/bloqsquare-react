@@ -6,7 +6,7 @@ interface buttonProps{
 
 const Button:FC<buttonProps> = ({text}) => {
   return (
-    <button className="play-button">{text}</button>
+    <button className="btn-larger fit-80 pink">{text}</button>
   )
 }
 

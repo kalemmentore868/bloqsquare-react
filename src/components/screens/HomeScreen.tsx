@@ -36,16 +36,30 @@ const play = () => {
 }
 
   return (
-    <div className='container'>
-        <Logo />
-        <Heading text='Choose Your Color' headingStyle='home-screen-text' />
-        <ColorPicker choseColor={choseColor}/>
-        <Versus colorPicked={color} machineColor={machineColor}/>
-        <span onClick={play}>
-           <Button text="play" /> 
-        </span>
+  	<section>
+    	<header>
+        	<Logo />
+        	<Heading text='Choose Your Color' headingStyle='home-screen-text' />
+   		</header>
+    	<article>
+        	<div className='container'>
+        <div className="row">
+        	<div className="col s12 center-align">
+        		<ColorPicker choseColor={choseColor}/>
+        	</div>
+  		</div>
+    	<div className="row">
+  			<div className="col s12">
+        		<Versus colorPicked={color} machineColor={machineColor}/>
+        	</div></div>
+  		<div className="row">
+        	<div className="center-align col s12" onClick={play}>
+           		<Button text="play" /> 
+        	</div></div>
+        </div>
         <Help />
-    </div>
+            </article>
+  </section>
   )
 }
 

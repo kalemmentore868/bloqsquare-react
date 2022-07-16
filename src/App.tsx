@@ -15,10 +15,9 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App container valign-wrapper">
       {screen === 1 && <HomeScreen startGame={startGame} />}
       {screen === 2 && <GameScreen player={player} machine={machine}/> }
-      
     </div>
   );
 }
