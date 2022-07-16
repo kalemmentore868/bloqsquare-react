@@ -4,7 +4,7 @@ import Logo from './Logo'
 const GameInfo:FC = () => {
   return (
     <div className='score'>
-        <Logo width={300}/>
+        <Logo />
     </div>
   )
 }

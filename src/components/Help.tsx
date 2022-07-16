@@ -9,15 +9,8 @@ const Help = () => {
         {helpMenuOpen && 
         <div className="modal">
 
-        <div className="help-content">
-            <Logo width={250}/>
-          <span className="close" onClick={() => setHelpMenu(!helpMenuOpen)}>&times;</span>
-          <h2>How to Play</h2>
-          <p>To play the game is simple! Try to bloq out as many of the squares as you can more than your opponent before the time runs out!
-            <br /> <br/>
-You can also unbloq your opponents squares by clicking/ double clicking on them! Beware! Your opponent can do the same! Happy playing!</p>
-        </div>
-      
+        <div className="container-fluid help"><div className="row"><div className="center-align col s12"><div className="container">		<Logo />
+        </div></div><div className="center-align col s12"><div className="container"><article><header><h3>How To Play</h3></header><p>To play the game is simple! Try to bloq out as many of the squares as you can more than your opponent before the time runs out!</p><p>You can also unbloq your opponents squares by clicking/ double clicking on them! <strong>Beware!</strong> Your opponent can do the same! Happy playing!</p></article></div></div></div></div>
       </div>
         }
     </div>

@@ -1,27 +1,31 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react' 
 
 interface versusProps{
   colorPicked:string;
   machineColor:string;
 }
 
-const Versus:FC<versusProps> = ({colorPicked, machineColor}) => {
+const Versus:FC<versusProps> = ({ colorPicked, machineColor }) => {
   
-
-
-
   return (
-    <div className='versus-container'>
-        <div className="player-header">
-            <h3>Player 1</h3>
-            <h3>A.I.</h3>
-        </div>
-        <div className="vs-box">
-            <div id="player-square" style={{backgroundColor: colorPicked}} className="square"></div>
-            <span style={{color: machineColor}}>vs</span>
-            <div id="machine-square" className="square" style={{backgroundColor: machineColor}}></div>
-        </div>
-    </div>
+  	<div className="col s12">
+  		<table className="centered grid-3 scores">
+        	<thead><tr><th>Player 1</th><th></th><th>Machine</th></tr></thead>
+        	<tbody style={{ "backgroundColor": "#ffffff" }}>
+            	<tr>
+                	<td className="color" style={{ "--color": colorPicked } as React.CSSProperties}>
+                    	<span className="bloq square"></span>
+                	</td>
+                	<td>
+                    	<span className="bloq large purple-text text-z-depth-2">VS</span>
+                	</td>
+                	<td className="color" style={{ "--color": machineColor } as React.CSSProperties}>
+                    	<span className="bloq square"></span>
+                	</td>
+            	</tr>
+        	</tbody>
+  		</table>
+  	</div>
   )
 }
 

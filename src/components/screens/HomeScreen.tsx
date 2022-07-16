@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import Logo from '../Logo'
-import "../../HomeScreenStyles.css"
 import Heading from '../Heading'
 import ColorPicker from '../ColorPicker'
 import Versus from '../Versus'
@@ -38,7 +37,7 @@ const play = () => {
 
   return (
     <div className='container'>
-        <Logo marginTop={-5}/>
+        <Logo />
         <Heading text='Choose Your Color' headingStyle='home-screen-text' />
         <ColorPicker choseColor={choseColor}/>
         <Versus colorPicked={color} machineColor={machineColor}/>
