@@ -89,78 +89,60 @@ const GameBoard: FC<GameBoardProps> = ({ player, machine, incrementPlayerScore, 
           <div className="center-align col no-padding s12">
             <table className="board grid-8">
               <tbody>
-                <tr>
-                  {grid1.map(cell => {
-                    return (
-                      <td className="color"><span className="square" key={cell.index}
-                        id={`${cell.index}`}
-
-                        style={{ backgroundColor: cell.backgroundColor }}
-                        onClick={(e) => squareClicked(e)}></span></td>
-                    )
-                  })}
-                </tr>
+                <tr>{grid1.map(cell => {
+                  return (
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                  )
+                })}</tr>
                 <tr>{grid2.map(cell => {
                   return (
-                    <td className="color"><span className="square" key={cell.index}
-                      id={`${cell.index}`}
-
-                      style={{ backgroundColor: cell.backgroundColor }}
-                      onClick={(e) => squareClicked(e)}></span></td>
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid3.map(cell => {
                   return (
-                    <td className="color"><span className="square" key={cell.index}
-                      id={`${cell.index}`}
-
-                      style={{ backgroundColor: cell.backgroundColor }}
-                      onClick={(e) => squareClicked(e)}></span></td>
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid4.map(cell => {
                   return (
-                    <td className="color"><span className="square" key={cell.index}
-                      id={`${cell.index}`}
-
-                      style={{ backgroundColor: cell.backgroundColor }}
-                      onClick={(e) => squareClicked(e)}></span></td>
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid5.map(cell => {
                   return (
-                    <td className="color"><span className="square" key={cell.index}
-                      id={`${cell.index}`}
-
-                      style={{ backgroundColor: cell.backgroundColor }}
-                      onClick={(e) => squareClicked(e)}></span></td>
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid6.map(cell => {
                   return (
-                    <td className="color"><span className="square" key={cell.index}
-                      id={`${cell.index}`}
-
-                      style={{ backgroundColor: cell.backgroundColor }}
-                      onClick={(e) => squareClicked(e)}></span></td>
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid7.map(cell => {
                   return (
-                    <td className="color"><span className="square" key={cell.index}
-                      id={`${cell.index}`}
-
-                      style={{ backgroundColor: cell.backgroundColor }}
-                      onClick={(e) => squareClicked(e)}></span></td>
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid8.map(cell => {
                   return (
-                    <td className="color"><span className="square" key={cell.index}
-                      id={`${cell.index}`}
-
-                      style={{ backgroundColor: cell.backgroundColor }}
-                      onClick={(e) => squareClicked(e)}></span></td>
+                    <td className="color"  key={cell.index}
+                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
                   )
                 })}</tr>
               </tbody>
