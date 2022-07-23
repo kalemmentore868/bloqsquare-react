@@ -2,71 +2,175 @@ import React, { FC, useState, useEffect } from 'react'
 import Grid from '../helpers/Grid'
 import Player from '../helpers/Player'
 
-interface GameBoardProps{
-    player:Player
-    machine:Player
+
+interface GameBoardProps {
+  player: Player
+  machine: Player
+  incrementPlayerScore: Function
+  decrementPlayerScore: Function
+  incrementMachineScore: Function
 }
 
 function generateRandomInteger(max: number): number {
   return Math.floor(Math.random() * max);
 }
 
-const GameBoard:FC<GameBoardProps> = ({player, machine}) => {
-  const [value, setValue] = useState(0)
- 
+const GameBoard: FC<GameBoardProps> = ({ player, machine, incrementPlayerScore, decrementPlayerScore, incrementMachineScore }) => {
+
+
   const [grid, setGrid] = useState(new Grid(8))
 
+  let grid1 = grid.cells.slice(0, 8)
+  let grid2 = grid.cells.slice(8, 16)
+  let grid3 = grid.cells.slice(16, 24)
+  let grid4 = grid.cells.slice(24, 32)
+  let grid5 = grid.cells.slice(32, 40)
+  let grid6 = grid.cells.slice(40, 48)
+  let grid7 = grid.cells.slice(48, 56)
+  let grid8 = grid.cells.slice(56, 64)
+
+
+  const handleSquareClicked = (index: number, player: Player, opponent: Player) => {
+    setGrid(prevState => ({
+      ...prevState,
+      cells: prevState.cells.map((cell) => {
+        if (cell.index === index) {
+          if (cell.isClicked) {
+            if (cell.backgroundColor === opponent.chosenColor) {
+              return { ...cell, backgroundColor: "transparent", isClicked: false }
+            } else {
+              if (!player.isComputer) decrementPlayerScore()
+              return cell //here is where to put d code for if a player click his own square
+            }
+          } else {
+            player.isComputer ? incrementMachineScore() : incrementPlayerScore()
+            return { ...cell, backgroundColor: player.chosenColor, isClicked: true }
+          }
+        } else {
+          return cell
+        }
+      })
+    }))
+
+  }
+
   useEffect(() => {
-  
+
     const computerInterval = setInterval(() => {
       const randomIndex = generateRandomInteger(
         grid.gridSize * grid.gridSize
       )
-      // console.log(randomIndex)
-      // const randomCell = grid.cells[randomIndex]
-      setGrid(prevState => ({
-        ...prevState,
-        cells: prevState.cells.map(
-          cell => cell.index === randomIndex ? {...cell, backgroundColor: machine.chosenColor, isClicked: true} : cell
-        )
-      }))
-       }, 1000)
 
-    
+      handleSquareClicked(randomIndex, machine, player)
+      console.log(machine.totalPoints)
+    }, 300)
+
+    return () => clearInterval(computerInterval)
+
+
+
   }, [])
-  
-  
-  
-    const gameStyle = {gridTemplateColumns: `repeat(${grid.gridSize}, 1fr)`}
 
-    const squareClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
-      let square = e.target as HTMLDivElement
-      let cellIndex = parseInt(square.id)
-      setGrid(prevState => ({
-        ...prevState,
-        cells: prevState.cells.map(
-          cell => cell.index === cellIndex ? {...cell, backgroundColor: player.chosenColor, isClicked: true} : cell
-        )
-      }))
-      //the above code grabs the id of the clicked element and 
-      //uses that to change the bg color of the cell in the cells
-      //list in the grid, then react rerenders
-    }
+
+
+
+
+  const squareClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
+    let square = e.target as HTMLDivElement
+    let cellIndex = parseInt(square.id)
+    handleSquareClicked(cellIndex, player, machine)
+  }
+
 
   return (
-    <div className='game-board' style={gameStyle}>
-        {grid.cells.map(cell => {
-            return(
-                <div 
-                key={cell.index} 
-                id={`${cell.index}`} 
-                className={cell.isClicked ? 'game-square clicked': "game-square" }
-                style={{backgroundColor: cell.backgroundColor}}
-                onClick={(e) => squareClicked(e)}
-                > </div>
-            )
-        })}
-    </div>
+    <article className='game-play' >
+      <div className="container-fluid">
+        <div className="row">
+          <div className="center-align col no-padding s12">
+            <table className="board grid-8">
+              <tbody>
+                <tr>
+                  {grid1.map(cell => {
+                    return (
+                      <td className="color"><span className="square" key={cell.index}
+                        id={`${cell.index}`}
+
+                        style={{ backgroundColor: cell.backgroundColor }}
+                        onClick={(e) => squareClicked(e)}></span></td>
+                    )
+                  })}
+                </tr>
+                <tr>{grid2.map(cell => {
+                  return (
+                    <td className="color"><span className="square" key={cell.index}
+                      id={`${cell.index}`}
+
+                      style={{ backgroundColor: cell.backgroundColor }}
+                      onClick={(e) => squareClicked(e)}></span></td>
+                  )
+                })}</tr>
+                <tr>{grid3.map(cell => {
+                  return (
+                    <td className="color"><span className="square" key={cell.index}
+                      id={`${cell.index}`}
+
+                      style={{ backgroundColor: cell.backgroundColor }}
+                      onClick={(e) => squareClicked(e)}></span></td>
+                  )
+                })}</tr>
+                <tr>{grid4.map(cell => {
+                  return (
+                    <td className="color"><span className="square" key={cell.index}
+                      id={`${cell.index}`}
+
+                      style={{ backgroundColor: cell.backgroundColor }}
+                      onClick={(e) => squareClicked(e)}></span></td>
+                  )
+                })}</tr>
+                <tr>{grid5.map(cell => {
+                  return (
+                    <td className="color"><span className="square" key={cell.index}
+                      id={`${cell.index}`}
+
+                      style={{ backgroundColor: cell.backgroundColor }}
+                      onClick={(e) => squareClicked(e)}></span></td>
+                  )
+                })}</tr>
+                <tr>{grid6.map(cell => {
+                  return (
+                    <td className="color"><span className="square" key={cell.index}
+                      id={`${cell.index}`}
+
+                      style={{ backgroundColor: cell.backgroundColor }}
+                      onClick={(e) => squareClicked(e)}></span></td>
+                  )
+                })}</tr>
+                <tr>{grid7.map(cell => {
+                  return (
+                    <td className="color"><span className="square" key={cell.index}
+                      id={`${cell.index}`}
+
+                      style={{ backgroundColor: cell.backgroundColor }}
+                      onClick={(e) => squareClicked(e)}></span></td>
+                  )
+                })}</tr>
+                <tr>{grid8.map(cell => {
+                  return (
+                    <td className="color"><span className="square" key={cell.index}
+                      id={`${cell.index}`}
+
+                      style={{ backgroundColor: cell.backgroundColor }}
+                      onClick={(e) => squareClicked(e)}></span></td>
+                  )
+                })}</tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </article>
   )
 }
 

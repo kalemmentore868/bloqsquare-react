@@ -1,13 +1,10 @@
 import React, { FC } from 'react'
 
-interface textDisplay{
-    headingStyle?:string;
-    text: string;
-}
 
-const Heading:FC<textDisplay> = ({text, headingStyle}) => {
+
+const Heading: FC = () => {
   return (
-    <h2 className={headingStyle} >{text}</h2>
+    <header className="container"><h2 className="center-align heading silom">Choose Your Color</h2></header>
   )
 }
 

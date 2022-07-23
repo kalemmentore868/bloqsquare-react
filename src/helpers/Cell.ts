@@ -6,7 +6,7 @@ export default class Cell {
   constructor(
     index: number,
     isClicked = false,
-    backgroundColor: string = "0 0"
+    backgroundColor: string = "transparent"
   ) {
     this.index = index;
     this.isClicked = isClicked;
