@@ -34,9 +34,7 @@ const HomeScreen: FC<homeProps> = ({ startGame }) => {
     const machine = new Player(machineColor, true)
     startGame(player, machine)
   }
-
-
-
+  
   return (
     <section>
       <header>

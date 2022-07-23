@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react' 
 
 interface versusProps {
   colorPicked: string;
@@ -8,9 +8,6 @@ interface versusProps {
 }
 
 const Versus: FC<versusProps> = ({ colorPicked, machineColor, playerScore, machineScore }) => {
-
-
-
 
   return (
     <div className="col s12">
