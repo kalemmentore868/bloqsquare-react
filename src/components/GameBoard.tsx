@@ -15,7 +15,7 @@ function generateRandomInteger(max: number): number {
   return Math.floor(Math.random() * max);
 }
 
-const GameBoard: FC<GameBoardProps> = ({ player, machine, incrementPlayerScore, decrementPlayerScore, incrementMachineScore }) => {
+const GameBoard: FC<GameBoardProps> = React.memo(({ player, machine, incrementPlayerScore, decrementPlayerScore, incrementMachineScore }) => {
 
 
   const [grid, setGrid] = useState(new Grid(8))
@@ -62,8 +62,8 @@ const GameBoard: FC<GameBoardProps> = ({ player, machine, incrementPlayerScore, 
       )
 
       handleSquareClicked(randomIndex, machine, player)
-      console.log(machine.totalPoints)
-    }, 300)
+
+    }, 250)
 
     return () => clearInterval(computerInterval)
 
@@ -91,58 +91,58 @@ const GameBoard: FC<GameBoardProps> = ({ player, machine, incrementPlayerScore, 
               <tbody>
                 <tr>{grid1.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid2.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid3.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid4.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid5.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid6.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid7.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
                 <tr>{grid8.map(cell => {
                   return (
-                    <td className="color"  key={cell.index}
-                      id={`${cell.index}`} style={{ "--color": cell.backgroundColor } as React.CSSProperties}
-                      onClick={(e) => squareClicked(e)}><span className="square"></span></td>
+                    <td className="color" key={cell.index}
+                      style={{ "--color": cell.backgroundColor } as React.CSSProperties}
+                      onClick={(e) => squareClicked(e)}><span id={`${cell.index}`} className="square"></span></td>
                   )
                 })}</tr>
               </tbody>
@@ -154,6 +154,6 @@ const GameBoard: FC<GameBoardProps> = ({ player, machine, incrementPlayerScore, 
 
     </article>
   )
-}
+})
 
 export default GameBoard

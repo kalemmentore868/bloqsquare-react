@@ -24,15 +24,15 @@ const GameScreen: FC<gameScreenProps> = ({ player, machine, endGame }) => {
 
   const incrementPlayerScore = () => {
     countPos.current++
-    if (countPos.current > 10) {
+    if (countPos.current > 5) {
       countPos.current = 0
-      setPlayerScore(playerScore + 10)
+      setPlayerScore(playerScore => playerScore + 5)
     }
 
   }
   const decrementPlayerScore = () => {
     countNeg.current++
-    if (countNeg.current > 20) {
+    if (countNeg.current > 25) {
       countNeg.current = 0
       setPlayerScore(playerScore - 10)
     }

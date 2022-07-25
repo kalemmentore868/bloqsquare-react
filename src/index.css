@@ -5024,6 +5024,7 @@ table td.color .square:after {
   width: 100%;
   background-color: var(--color);
   display: block;
+  content: "";
 }
 table.board {
   background-color: #ffffff0a;
@@ -5211,6 +5212,7 @@ main > section {
   height: 100%;
   display: flex;
 }
+
 @media screen and (min-width: 680px) {
   .logo-md {
     width: 54%;
@@ -5243,6 +5245,7 @@ main > section {
     flex: 1;
   }
 }
+
 @media screen and (max-width: 959px) and (orientation: landscape) {
   main:after {
     content: "↺";

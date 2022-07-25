@@ -4,9 +4,9 @@ interface timerProps {
     gameOver: Function
 }
 
-const Timer: FC<timerProps> = ({ gameOver }) => {
-    const [seconds, setSeconds] = useState(30);
-    const [minutes, setMinutes] = useState(1);
+const Timer: FC<timerProps> = React.memo(({ gameOver }) => {
+    const [seconds, setSeconds] = useState(40);
+    const [minutes, setMinutes] = useState(0);
 
     let timer: any;
     useEffect(() => {
@@ -22,7 +22,7 @@ const Timer: FC<timerProps> = ({ gameOver }) => {
             if (minutes === 0 && seconds === 0) {
                 gameOver()
             }
-        }, 1000)
+        }, 600)
 
         return () => clearInterval(timer)
     })
@@ -35,6 +35,6 @@ const Timer: FC<timerProps> = ({ gameOver }) => {
 
 
     )
-}
+})
 
-export default React.memo(Timer)
+export default Timer
