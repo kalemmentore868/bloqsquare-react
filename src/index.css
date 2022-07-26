@@ -5197,13 +5197,13 @@ tr {
 }
 html {
   color: #ffeb3b;
+  background: linear-gradient(203deg, #37407b 64%, #191a22 100%);
 }
 body {
   height: 100vh;
 }
 main {
   min-height: 100%;
-  background: linear-gradient(203deg, #37407b 64%, #191a22 100%);
 }
 main > section {
   margin: 0 auto;
