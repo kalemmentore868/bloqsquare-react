@@ -7,13 +7,16 @@ interface timerProps {
 const Timer: FC<timerProps> = React.memo(({ gameOver }) => {
     const [seconds, setSeconds] = useState(40);
     const [minutes, setMinutes] = useState(0);
+	const timeSFx = new Audio('./audio/background-music.wav');
 
     let timer: any;
     useEffect(() => {
 
         timer = setInterval(() => {
             setSeconds(seconds - 1)
-
+        
+			if(seconds % 2 == 0) timeSFx.play();
+        
             if (seconds === 0) {
                 setMinutes(minutes - 1)
                 setSeconds(59)

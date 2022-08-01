@@ -19,6 +19,8 @@ const GameBoard: FC<GameBoardProps> = React.memo(({ player, machine, incrementPl
 
 
   const [grid, setGrid] = useState(new Grid(8))
+  const opponentFx = new Audio('./audio/opponent.wav')
+  const youFx = new Audio('./audio/you.wav')
 
   let grid1 = grid.cells.slice(0, 8)
   let grid2 = grid.cells.slice(8, 16)
@@ -37,13 +39,21 @@ const GameBoard: FC<GameBoardProps> = React.memo(({ player, machine, incrementPl
         if (cell.index === index) {
           if (cell.isClicked) {
             if (cell.backgroundColor === opponent.chosenColor) {
+            
               return { ...cell, backgroundColor: "transparent", isClicked: false }
             } else {
               if (!player.isComputer) decrementPlayerScore()
               return cell //here is where to put d code for if a player click his own square
             }
           } else {
-            player.isComputer ? incrementMachineScore() : incrementPlayerScore()
+            if(player.isComputer) {
+            	opponentFx.play()
+            	incrementMachineScore() 
+            } else {
+            	youFx.play()
+                incrementPlayerScore()
+            }
+          
             return { ...cell, backgroundColor: player.chosenColor, isClicked: true }
           }
         } else {
