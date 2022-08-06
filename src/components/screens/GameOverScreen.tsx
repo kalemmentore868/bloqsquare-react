@@ -16,22 +16,10 @@ const GameOverScreen: FC<gameOverProps> = ({
     machine,
     restartGame,
 }) => {
+	const audioSFx = new Audio('./audio/end.wav');
+	audioSFx.play();
     return (
-        // <div className="game-over-container">
-        //     <div className="game-over">
-        //         <Logo />
-        //         {/* <Heading text="Game Over" headingStyle='home-screen-text' /> */}
-        //     </div>
-        //     <div className="results-container">
-        //         <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} playerScore={player.totalPoints} machineScore={machine.totalPoints} />
-        //         <span onClick={() => restartGame()}>
-        //             <Button text='Play Again' />
-        //         </span>
-
-        //     </div>
-
-        // </div>
-        <section className="leaderboard">
+    	<section className="leaderboard">
             <article>
                 <header>
                     <div className="row">

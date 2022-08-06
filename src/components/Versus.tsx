@@ -15,7 +15,7 @@ const Versus: FC<versusProps> = ({ colorPicked, machineColor, playerScore, machi
   return (
     <div className="col s12">
       <table className="centered grid-3 scores">
-        <thead><tr><th>Player 1</th><th></th><th>Machine</th></tr></thead>
+        <thead><tr><th>You</th><th></th><th>A.I.</th></tr></thead>
         <tbody style={{ "backgroundColor": "#ffffff" }}>
           <tr>
             <td className="color" style={{ "--color": colorPicked } as React.CSSProperties}>
