@@ -15,7 +15,7 @@ function generateRandomInteger(max: number): number {
   return Math.floor(Math.random() * max);
 }
 
-const GameBoard: FC<GameBoardProps> = React.memo(({ player, machine, incrementPlayerScore, decrementPlayerScore, incrementMachineScore }) => {
+const GameBoard: FC<GameBoardProps> = ({ player, machine, incrementPlayerScore, decrementPlayerScore, incrementMachineScore }) => {
 
 
   const [grid, setGrid] = useState(new Grid(8))
@@ -39,21 +39,21 @@ const GameBoard: FC<GameBoardProps> = React.memo(({ player, machine, incrementPl
         if (cell.index === index) {
           if (cell.isClicked) {
             if (cell.backgroundColor === opponent.chosenColor) {
-            
+
               return { ...cell, backgroundColor: "transparent", isClicked: false }
             } else {
               if (!player.isComputer) decrementPlayerScore()
               return cell //here is where to put d code for if a player click his own square
             }
           } else {
-            if(player.isComputer) {
-            	opponentFx.play()
-            	incrementMachineScore() 
+            if (player.isComputer) {
+              opponentFx.play()
+              incrementMachineScore()
             } else {
-            	youFx.play()
-                incrementPlayerScore()
+              youFx.play()
+              incrementPlayerScore()
             }
-          
+
             return { ...cell, backgroundColor: player.chosenColor, isClicked: true }
           }
         } else {
@@ -164,6 +164,6 @@ const GameBoard: FC<GameBoardProps> = React.memo(({ player, machine, incrementPl
 
     </article>
   )
-})
+}
 
 export default GameBoard
