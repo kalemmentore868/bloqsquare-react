@@ -1,25 +1,26 @@
 import React, { FC } from "react";
+import { useGameContext } from "../../Context/GameContext";
 import Player from "../../helpers/Player";
 import Button from "../Button";
-import Heading from "../Heading";
+import Heading from "../homeScreenComponents/Heading";
 import Logo from "../Logo";
 import Versus from "../Versus";
 
-interface gameOverProps {
-    player: Player;
-    machine: Player;
-    restartGame: Function;
-}
 
-const GameOverScreen: FC<gameOverProps> = ({
-    player,
-    machine,
-    restartGame,
-}) => {
-	const audioSFx = new Audio('./audio/end.wav');
-	audioSFx.play();
+const GameOverScreen = () => {
+    const { gameObj, setGameObj } = useGameContext();
+
+    const audioSFx = new Audio('./audio/end.wav');
+    audioSFx.play();
+
+    const restartGame = () => {
+        setGameObj({
+            ...gameObj, screen: 1
+        })
+    }
+
     return (
-    	<section className="leaderboard">
+        <section className="leaderboard">
             <article>
                 <header>
                     <div className="row">
@@ -36,7 +37,7 @@ const GameOverScreen: FC<gameOverProps> = ({
             <article>
                 <div className="container-fluid">
                     <div className="row">
-                        <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} playerScore={player.totalPoints} machineScore={machine.totalPoints} />
+                        <Versus colorPicked={gameObj.player.chosenColor} machineColor={gameObj.machine.chosenColor} playerScore={gameObj.player.totalPoints} machineScore={gameObj.machine.totalPoints} />
                     </div>
                     <div className="row">
                         <div className="center-align col s12">

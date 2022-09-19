@@ -1,18 +1,18 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useContext } from 'react'
 import Logo from '../Logo'
-import Heading from '../Heading'
-import ColorPicker from '../ColorPicker'
+import Heading from '../homeScreenComponents/Heading'
+import ColorPicker from '../homeScreenComponents/ColorPicker'
 import Versus from '../Versus'
 import Button from '../Button'
-import Help from '../Help'
-import Player from '../../helpers/Player'
+import { useGameContext } from '../../Context/GameContext'
 
-interface homeProps {
-  startGame: Function;
-}
+// interface homeProps {
+//   startGame: Function;
+// }
 
-const HomeScreen: FC<homeProps> = ({ startGame }) => {
+const HomeScreen = () => {
   const [color, setColor] = useState("#ff0000")
+  const { gameObj, setGameObj } = useGameContext();
 
   const choseColor = (colorPicked: string) => {
     setColor(colorPicked)
@@ -30,9 +30,13 @@ const HomeScreen: FC<homeProps> = ({ startGame }) => {
   let machineColor = invertHex(color)
 
   const play = () => {
-    const player = new Player(color)
-    const machine = new Player(machineColor, true)
-    startGame(player, machine)
+    setGameObj({
+      player: { ...gameObj.player, chosenColor: color },
+      machine: { ...gameObj.machine, chosenColor: machineColor },
+      screen: 2
+
+    })
+
   }
 
 

@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
+import { useGameContext } from '../../Context/GameContext';
 
-interface scoreProps {
-    score: number
-}
-
-const Score: FC<scoreProps> = ({ score }) => {
+const Score = () => {
+    const { gameObj, setGameObj } = useGameContext();
+    const score = gameObj.player.totalPoints
 
     return (
         <div className="center-align col s12">
