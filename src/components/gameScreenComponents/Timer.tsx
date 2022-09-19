@@ -15,6 +15,7 @@ const Timer = () => {
     useEffect(() => {
 
         timer = setTimeout(() => {
+
             setMilliseconds(milliseconds - 1)
             if (milliseconds === 0) {
 
@@ -33,11 +34,11 @@ const Timer = () => {
                 }
             }
 
-        }, 50)
+        }, 80)
 
         return () => { clearInterval(timer) }
 
-    }, [])
+    })
 
 
 
