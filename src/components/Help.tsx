@@ -5,11 +5,11 @@ const Help = () => {
   const [helpMenuOpen, setHelpMenu] = useState(false);
   return (
     <div>
-      <button className="open-help" onClick={() => setHelpMenu(!helpMenuOpen)}>
+      <button className="open-help" onClick={() => setHelpMenu(help => !help)}>
         ?
       </button>
       {helpMenuOpen && (
-        <div className="modal">
+        <div className="modal" onClick={() => setHelpMenu(help => !help)}>
           <div className="container-fluid help">
             <div className="row">
               <div className="center-align col s12">

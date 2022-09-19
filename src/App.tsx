@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Help from './components/Help';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameScreen from './components/screens/GameScreen';
 import HomeScreen from './components/screens/HomeScreen';
@@ -22,6 +23,7 @@ function App() {
         {screen === 2 && <GameScreen />}
         {screen === 3 && <GameOverScreen />}
       </GameContext.Provider  >
+      <Help />
     </main>
 
   );
