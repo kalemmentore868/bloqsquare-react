@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useRef } from 'react'
+import React, { FC, useEffect, useState, useRef, memo } from 'react'
 import { useGameContext } from '../../Context/GameContext';
 
 
@@ -8,33 +8,34 @@ const Timer = () => {
     const [minutes, setMinutes] = useState(0);
     const [milliseconds, setMilliseconds] = useState(59);
     const timeSFx = new Audio('./audio/background-music.wav');
+    const { gameProperties, setGameProperties } = useGameContext();
 
-    const { gameObj, setGameObj } = useGameContext();
 
     let timer: any;
     useEffect(() => {
 
         timer = setTimeout(() => {
 
-            setMilliseconds(milliseconds - 1)
+
+            setMilliseconds(prevValue => prevValue - 1)
             if (milliseconds === 0) {
 
-                setSeconds(seconds - 1)
+                setSeconds(prevValue => prevValue - 1)
                 setMilliseconds(59)
 
                 if (seconds % 2 == 0) timeSFx.play();
 
                 if (seconds === 0) {
-                    setMinutes(minutes - 1)
+                    setMinutes(prevValue => prevValue - 1)
                     setSeconds(59)
                 }
 
-                if (minutes === 0 && seconds === 0) {
-                    setGameObj({ ...gameObj, screen: 3 })
+                if (minutes <= 0 && seconds <= 0) {
+                    setGameProperties({ ...gameProperties, screen: 3 })
                 }
             }
 
-        }, 80)
+        }, 1)
 
         return () => { clearInterval(timer) }
 
@@ -50,4 +51,4 @@ const Timer = () => {
     )
 }
 
-export default Timer
+export default memo(Timer)

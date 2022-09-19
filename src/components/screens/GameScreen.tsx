@@ -1,12 +1,17 @@
-import GameBoard2 from '../gameScreenComponents/GameBoard2'
+import React, { FC } from "react"
+import GameBoard from '../gameScreenComponents/GameBoard'
 import GameInfo from '../gameScreenComponents/GameInfo'
 
+interface GameScreenProps {
+  incrementMachineScore: Function
+  incrementPlayerScore: Function
+}
 
-const GameScreen = () => {
+const GameScreen: FC<GameScreenProps> = ({ incrementMachineScore, incrementPlayerScore }) => {
   return (
     <section className='game'>
       <GameInfo />
-      <GameBoard2 />
+      <GameBoard incrementPlayerScore={incrementPlayerScore} incrementMachineScore={incrementMachineScore} />
     </section>
   )
 }

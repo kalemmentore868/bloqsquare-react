@@ -6,16 +6,22 @@ import Heading from "../homeScreenComponents/Heading";
 import Logo from "../Logo";
 import Versus from "../Versus";
 
+interface GameOverScreenProps {
+    scores: {
+        playerScore: number,
+        machineScore: number
+    }
+}
 
-const GameOverScreen = () => {
-    const { gameObj, setGameObj } = useGameContext();
+const GameOverScreen: FC<GameOverScreenProps> = ({ scores }) => {
+    const { gameProperties, setGameProperties } = useGameContext();
 
     const audioSFx = new Audio('./audio/end.wav');
     audioSFx.play();
 
     const restartGame = () => {
-        setGameObj({
-            ...gameObj, screen: 1
+        setGameProperties({
+            ...gameProperties, screen: 1
         })
     }
 
@@ -37,7 +43,7 @@ const GameOverScreen = () => {
             <article>
                 <div className="container-fluid">
                     <div className="row">
-                        <Versus colorPicked={gameObj.player.chosenColor} machineColor={gameObj.machine.chosenColor} playerScore={gameObj.player.totalPoints} machineScore={gameObj.machine.totalPoints} />
+                        <Versus colorPicked={gameProperties.playerColor} machineColor={gameProperties.machineColor} playerScore={scores.playerScore} machineScore={scores.machineScore} />
                     </div>
                     <div className="row">
                         <div className="center-align col s12">

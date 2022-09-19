@@ -1,12 +1,18 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useRef } from 'react'
 import Grid2 from '../../helpers/Grid2'
 import TableRow from './TableRow'
 
+interface TableRowProps {
+    incrementMachineScore: Function
+    incrementPlayerScore: Function
+}
 
 
-const GameBoard2 = () => {
-    const grid = new Grid2(8, 8)
 
+const GameBoard: FC<TableRowProps> = ({ incrementMachineScore, incrementPlayerScore }) => {
+
+
+    const grid = useRef(new Grid2(8, 8))
 
 
     return (
@@ -16,9 +22,9 @@ const GameBoard2 = () => {
                     <div className="center-align col no-padding s12">
                         <table className="board grid-8">
                             <tbody>
-                                {grid.rowList.map((row) => {
+                                {grid.current.rowList.map((row) => {
                                     return (
-                                        <TableRow key={row[0].index} row={row} />
+                                        <TableRow key={row[0].index} row={row} incrementPlayerScore={incrementPlayerScore} incrementMachineScore={incrementMachineScore} />
                                     )
                                 })}
                             </tbody>
@@ -32,4 +38,4 @@ const GameBoard2 = () => {
     )
 }
 
-export default GameBoard2
+export default GameBoard

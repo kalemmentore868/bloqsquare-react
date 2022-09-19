@@ -1,22 +1,30 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
+import React, { FC, useState, useEffect, memo } from 'react'
 import { useGameContext } from '../../Context/GameContext';
 import Cell from '../../helpers/Cell'
 import Player from '../../helpers/Player'
 
 interface SquareRowProps {
     cell: Cell
+    incrementMachineScore: Function
+    incrementPlayerScore: Function
 }
 
 function generateRandomInteger(max: number): number {
     return Math.floor(Math.random() * max);
 }
 
+function areEqual(prevProps: Cell, nextProps: Cell): boolean {
+    return prevProps.backgroundColor === nextProps.backgroundColor
+}
 
-const Square: FC<SquareRowProps> = ({ cell }) => {
+const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlayerScore }) => {
     const [cellSquare, setCellSquare] = useState(cell);
-    const { gameObj, setGameObj } = useGameContext();
-    const { player, machine } = gameObj
 
+    let player = new Player("red")
+    let machine = new Player("blue", true)
+    // const { player, machine } = gameObj
+
+    console.log("square is rerndering")
     //for a random square to be coloured
     useEffect(() => {
 
@@ -36,9 +44,12 @@ const Square: FC<SquareRowProps> = ({ cell }) => {
     }, [])
 
     useEffect(() => {
+
+
+
         if (cellSquare.backgroundColor === player.chosenColor) {
             incrementPlayerScore()
-        } else if (cellSquare.backgroundColor === player.chosenColor) {
+        } else if (cellSquare.backgroundColor === machine.chosenColor) {
             incrementMachineScore()
         }
 
@@ -72,35 +83,7 @@ const Square: FC<SquareRowProps> = ({ cell }) => {
 
     }
 
-    const decrementPlayerScore = () => {
-        setGameObj(prevState => ({
-            ...prevState,
-            player: {
-                ...prevState.player,
-                totalPoints: prevState.player.totalPoints - 1
-            }
-        }))
-    }
 
-    const incrementPlayerScore = () => {
-        setGameObj(prevState => ({
-            ...prevState,
-            player: {
-                ...prevState.player,
-                totalPoints: prevState.player.totalPoints + 1
-            }
-        }))
-    }
-
-    const incrementMachineScore = () => {
-        setGameObj(prevState => ({
-            ...prevState,
-            machine: {
-                ...prevState.machine,
-                totalPoints: prevState.machine.totalPoints + 1
-            }
-        }))
-    }
 
     const opponentFx = new Audio('./audio/opponent.wav')
     const youFx = new Audio('./audio/you.wav')

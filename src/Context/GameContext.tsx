@@ -2,25 +2,30 @@ import { createContext, useContext } from "react"
 import Grid2 from "../helpers/Grid2";
 import Player from "../helpers/Player";
 
-interface GameObj {
-    player: Player;
-    machine: Player;
+interface GameProperties {
+    playerColor: string;
+    machineColor: string;
     screen: number;
 }
 
 export type GlobalContent = {
-    gameObj: GameObj
-    setGameObj: React.Dispatch<React.SetStateAction<{ player: Player; machine: Player; screen: number; }>>
+    gameProperties: GameProperties
+    // setGameProperties: React.Dispatch<React.SetStateAction<{
+    //     playerColor: string;
+    //     machineColor: string;
+    //     screen: number;
+    // }>>
+    setGameProperties: (c: GameProperties) => void
 }
 
 export const GameContext = createContext<GlobalContent>({
-    gameObj: {
-        player: new Player("red"),
-        machine: new Player("blue", true),
-        screen: 1,
+    gameProperties: {
+        playerColor: "red",
+        machineColor: "blue",
+        screen: 1
 
     },
-    setGameObj: () => { }
+    setGameProperties: () => { }
 })
 
 export const useGameContext = () => useContext(GameContext)

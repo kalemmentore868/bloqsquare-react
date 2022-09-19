@@ -12,7 +12,7 @@ import { useGameContext } from '../../Context/GameContext'
 
 const HomeScreen = () => {
   const [color, setColor] = useState("#ff0000")
-  const { gameObj, setGameObj } = useGameContext();
+  const { gameProperties, setGameProperties } = useGameContext();
 
   const choseColor = (colorPicked: string) => {
     setColor(colorPicked)
@@ -30,13 +30,13 @@ const HomeScreen = () => {
   let machineColor = invertHex(color)
 
   const play = () => {
-    setGameObj({
-      player: { ...gameObj.player, chosenColor: color },
-      machine: { ...gameObj.machine, chosenColor: machineColor },
+
+    setGameProperties({
+      playerColor: color,
+      machineColor: machineColor,
       screen: 2
 
     })
-
   }
 
 

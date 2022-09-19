@@ -15,7 +15,7 @@ const GameInfo = () => {
       <header className="container-fluid">
         <div className="dashboard row">
           <Timer />
-          <Score />
+          {/* <Score /> */}
         </div>
       </header>
     </article>
