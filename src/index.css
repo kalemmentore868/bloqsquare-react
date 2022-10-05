@@ -1640,7 +1640,7 @@ figcaption,
 figure,
 main {
   display: block;
-  width:100%;
+  width: 100%;
   height: 100vh;
 }
 figure {
@@ -5039,7 +5039,7 @@ table td.color .square {
 table td.color .square:after {
   height: 100%;
   width: 100%;
-  transition: background-color .2s ease-in;
+  transition: background-color 0.2s ease-in;
   background-color: var(--color);
   display: block;
   content: "";
@@ -5232,6 +5232,12 @@ main > section {
   display: flex;
 }
 
+@media screen and (min-width: 320px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
 @media screen and (min-width: 680px) {
   .logo-md {
     width: 54%;
@@ -5277,5 +5283,49 @@ main > section {
     display: flex;
     position: absolute;
     inset: 0;
+  }
+}
+
+@media screen and (orientation: portrait) and (max-width: 468px) {
+  html,
+  body {
+    overflow: hidden;
+  }
+
+  body {
+    height: inherit;
+    overflow-y: scroll;
+    overscroll-behavior-y: auto;
+  }
+
+  main.valign-wrapper {
+    align-items: flex-start;
+  }
+
+  .game article header .row {
+    margin-bottom: 0;
+  }
+
+  .logo {
+    width: 75%;
+  }
+
+  .clock {
+    font-size: 2rem;
+    line-height: 1.3rem;
+    padding: 12px 8px 4px;
+  }
+
+  .points {
+    font-size: 1rem;
+  }
+
+  .points #points {
+    font-size: 1.5rem;
+  }
+
+  .leaderboard button.btn-larger {
+    font-size: 1.6rem;
+    white-space: nowrap;
   }
 }
