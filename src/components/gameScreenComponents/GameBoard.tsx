@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
+import { FC, useRef } from 'react'
 import Grid2 from '../../helpers/Grid2'
 import TableRow from './TableRow'
 

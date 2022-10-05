@@ -1,7 +1,6 @@
-import React, { FC, useState, useEffect, memo } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useGameContext } from '../../Context/GameContext';
 import Cell from '../../helpers/Cell'
-import Player from '../../helpers/Player'
 
 interface SquareRowProps {
     cell: Cell
@@ -86,9 +85,7 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
 
 
 
-    const squareClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
-        // let square = e.target as HTMLDivElement
-        // randomIndex.current = generateRandomInteger(parseInt(square.id)) + 10
+    const squareClicked = () => {
         handleSquareClicked(playerColor, machineColor, false)
     }
 
@@ -97,7 +94,7 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
     return (
         <td className="color" key={cellSquare.index}
             style={{ "--color": cellSquare.backgroundColor } as React.CSSProperties}
-            onClick={(e) => squareClicked(e)}><span id={`${cellSquare.index}`} className="square"></span></td>
+            onClick={squareClicked}><span id={`${cellSquare.index}`} className="square"></span></td>
     )
 }
 

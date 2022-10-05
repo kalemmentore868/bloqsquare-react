@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC } from "react"
 import GameBoard from '../gameScreenComponents/GameBoard'
 import GameInfo from '../gameScreenComponents/GameInfo'
 

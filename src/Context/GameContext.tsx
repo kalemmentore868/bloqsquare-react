@@ -1,6 +1,4 @@
 import { createContext, useContext } from "react"
-import Grid2 from "../helpers/Grid2";
-import Player from "../helpers/Player";
 
 interface GameProperties {
     playerColor: string;
@@ -10,11 +8,7 @@ interface GameProperties {
 
 export type GlobalContent = {
     gameProperties: GameProperties
-    // setGameProperties: React.Dispatch<React.SetStateAction<{
-    //     playerColor: string;
-    //     machineColor: string;
-    //     screen: number;
-    // }>>
+
     setGameProperties: (c: GameProperties) => void
 }
 

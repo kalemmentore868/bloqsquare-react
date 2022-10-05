@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Help from './components/Help';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameScreen from './components/screens/GameScreen';
 import HomeScreen from './components/screens/HomeScreen';
-import { GameContext, useGameContext } from './Context/GameContext'
-import Grid2 from './helpers/Grid2';
-import Player from './helpers/Player';
+import { GameContext } from './Context/GameContext'
 
 
 function App() {

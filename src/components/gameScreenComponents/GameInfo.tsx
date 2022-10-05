@@ -1,4 +1,3 @@
-import React from "react";
 import Logo from "../Logo";
 import Score from "./Score";
 import Timer from "./Timer";

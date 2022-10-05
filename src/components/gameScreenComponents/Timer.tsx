@@ -27,7 +27,7 @@ const Timer = () => {
     return (
 
         <div className="col s12"><div className="clock pink z-depth-2"> <Countdown
-            date={Date.now() + 10000 * 5}
+            date={Date.now() + 25000}
             intervalDelay={0}
             precision={3}
             renderer={renderer}

@@ -1,8 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useGameContext } from "../../Context/GameContext";
-import Player from "../../helpers/Player";
 import Button from "../Button";
-import Heading from "../homeScreenComponents/Heading";
 import Logo from "../Logo";
 import Versus from "../Versus";
 

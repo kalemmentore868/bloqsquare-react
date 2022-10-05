@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from 'react'
+import { useState } from 'react'
 import Logo from '../Logo'
 import Heading from '../homeScreenComponents/Heading'
 import ColorPicker from '../homeScreenComponents/ColorPicker'
@@ -6,13 +6,10 @@ import Versus from '../Versus'
 import Button from '../Button'
 import { useGameContext } from '../../Context/GameContext'
 
-// interface homeProps {
-//   startGame: Function;
-// }
 
 const HomeScreen = () => {
   const [color, setColor] = useState("#ff0000")
-  const { gameProperties, setGameProperties } = useGameContext();
+  const { setGameProperties } = useGameContext();
 
   const choseColor = (colorPicked: string) => {
     setColor(colorPicked)

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Cell from '../../helpers/Cell'
 import Square from './Square'
 interface TableRowProps {
