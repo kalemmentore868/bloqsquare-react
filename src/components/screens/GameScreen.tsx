@@ -5,6 +5,7 @@ import GameInfo from '../gameScreenComponents/GameInfo'
 interface GameScreenProps {
   incrementMachineScore: Function
   incrementPlayerScore: Function
+
 }
 
 const GameScreen: FC<GameScreenProps> = ({ incrementMachineScore, incrementPlayerScore }) => {

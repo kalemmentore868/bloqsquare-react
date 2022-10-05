@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, memo } from 'react'
+import React, { FC } from 'react'
 import Cell from '../../helpers/Cell'
 import Square from './Square'
 interface TableRowProps {
@@ -7,9 +7,6 @@ interface TableRowProps {
     incrementPlayerScore: Function
 }
 
-function areEqual(prevProps: Cell[], nextProps: Cell[]): boolean {
-    return prevProps[0].backgroundColor === nextProps[0].backgroundColor
-}
 
 const TableRow: FC<TableRowProps> = ({ row, incrementMachineScore, incrementPlayerScore }) => {
 

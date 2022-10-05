@@ -13,16 +13,12 @@ function generateRandomInteger(max: number): number {
     return Math.floor(Math.random() * max);
 }
 
-function areEqual(prevProps: Cell, nextProps: Cell): boolean {
-    return prevProps.backgroundColor === nextProps.backgroundColor
-}
 
 const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlayerScore }) => {
     const [cellSquare, setCellSquare] = useState(cell);
+    const { gameProperties } = useGameContext()
 
-    let player = new Player("red")
-    let machine = new Player("blue", true)
-    // const { player, machine } = gameObj
+    const { playerColor, machineColor } = gameProperties
 
     console.log("square is rerndering")
     //for a random square to be coloured
@@ -33,7 +29,7 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
 
             if (cellSquare.index === randomIndex) {
 
-                handleSquareClicked(machine, player)
+                handleSquareClicked(machineColor, playerColor, true)
             }
 
 
@@ -47,9 +43,9 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
 
 
 
-        if (cellSquare.backgroundColor === player.chosenColor) {
+        if (cellSquare.backgroundColor === playerColor) {
             incrementPlayerScore()
-        } else if (cellSquare.backgroundColor === machine.chosenColor) {
+        } else if (cellSquare.backgroundColor === machineColor) {
             incrementMachineScore()
         }
 
@@ -58,10 +54,10 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
 
 
 
-    const handleSquareClicked = (player: Player, opponent: Player) => {
+    const handleSquareClicked = (playerColor: string, machineColor: string, machineDidClick: boolean) => {
         setCellSquare(prevState => {
             if (prevState.isClicked) {
-                if (prevState.backgroundColor === opponent.chosenColor) {
+                if (prevState.backgroundColor === machineColor) {
 
                     return { ...prevState, backgroundColor: "transparent", isClicked: false }
                 } else {
@@ -69,7 +65,7 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
                     return prevState //here is where to put d code for if a player click his own square
                 }
             } else {
-                if (player.isComputer) {
+                if (machineDidClick) {
                     opponentFx.play()
                     // incrementMachineScore()
                 } else {
@@ -77,7 +73,7 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
                     // incrementPlayerScore()
                 }
 
-                return { ...prevState, backgroundColor: player.chosenColor, isClicked: true }
+                return { ...prevState, backgroundColor: playerColor, isClicked: true }
             }
         })
 
@@ -93,7 +89,7 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
     const squareClicked = (e: React.MouseEvent<Element, MouseEvent>) => {
         // let square = e.target as HTMLDivElement
         // randomIndex.current = generateRandomInteger(parseInt(square.id)) + 10
-        handleSquareClicked(player, machine)
+        handleSquareClicked(playerColor, machineColor, false)
     }
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Help from './components/Help';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameScreen from './components/screens/GameScreen';
@@ -16,7 +16,12 @@ function App() {
     screen: 1
   })
 
+
+
   const scores = useRef({ playerScore: 0, machineScore: 0 })
+
+
+
 
   const incrementPlayerScore = () => {
     scores.current.playerScore++
@@ -30,7 +35,7 @@ function App() {
   if (screen === 1) {
     scores.current = { playerScore: 0, machineScore: 0 }
   }
-  console.log(screen)
+
 
   return (
     <main className="App container valign-wrapper">
