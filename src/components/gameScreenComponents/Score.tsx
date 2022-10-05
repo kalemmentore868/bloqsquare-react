@@ -4,18 +4,25 @@ import { useGameContext } from '../../Context/GameContext';
 const Score = () => {
     const [score, setScore] = useState(0)
     const { gameProperties } = useGameContext()
-    const { playerColor, machineColor } = gameProperties
+    const { playerColor } = gameProperties
     const clickedSquares = useRef([])
 
     useEffect(() => {
-        const handleClick = (event: any) => {
-            const opponentSquareClicked = getComputedStyle(event.target).getPropertyValue("--color") === "transparent"
-            const blankSquareClickedOrOwnSquareClicked = getComputedStyle(event.target).getPropertyValue("--color") === playerColor
-            const blackSquareClicked = !clickedSquares.current.includes(event.target)
+        const handleClick = (event: MouseEvent) => {
+            let square = event.target as HTMLSpanElement
+            const opponentSquareClicked = getComputedStyle(square).getPropertyValue("--color") === "transparent"
+            const blankSquareClickedOrOwnSquareClicked = getComputedStyle(square).getPropertyValue("--color") === playerColor
+            const blackSquareClicked = blankSquareClickedOrOwnSquareClicked && !clickedSquares.current.includes(square)
 
-            if (event.target.tagName === "SPAN" && blackSquareClicked) {
+            if (square.tagName === "SPAN" && blackSquareClicked) {
                 setScore(prev => prev + 1)
-                clickedSquares.current.push(event.target)
+                clickedSquares.current.push(square)
+            } else if (square.tagName === "SPAN" && opponentSquareClicked && clickedSquares.current.includes(square)) {
+                const index = clickedSquares.current.indexOf(square);
+                if (index > -1) {
+                    clickedSquares.current.splice(index, 1);
+                }
+
             }
 
         }
