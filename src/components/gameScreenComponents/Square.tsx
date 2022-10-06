@@ -1,24 +1,15 @@
 import React, { FC, useState, useEffect } from "react";
 import { useGameContext } from "../../Context/GameContext";
 import Cell from "../../helpers/Cell";
-import { Howl } from "howler"
 
-// const opponentFx = new Howl({
-//     src: ["./audio/opponent.wav"],
-//     html5: true,
-//     preload: true
-// });
-// const youFx = new Howl({
-//     src: ["./audio/you.wav"],
-//     html5: true,
-//     preload: true
-// });
 
 
 interface SquareRowProps {
     cell: Cell;
     incrementMachineScore: Function;
     incrementPlayerScore: Function;
+    callOpponentSound: Function;
+    callPlayerSound: Function;
 }
 
 function generateRandomInteger(max: number): number {
@@ -29,6 +20,8 @@ const Square: FC<SquareRowProps> = ({
     cell,
     incrementMachineScore,
     incrementPlayerScore,
+    callOpponentSound,
+    callPlayerSound
 }) => {
     const [cellSquare, setCellSquare] = useState(cell);
     const { gameProperties } = useGameContext();
@@ -36,8 +29,6 @@ const Square: FC<SquareRowProps> = ({
     const { playerColor, machineColor } = gameProperties;
 
 
-
-    console.log("square is rerndering");
     //for a random square to be coloured
     useEffect(() => {
         const computerInterval = setInterval(() => {
@@ -54,9 +45,11 @@ const Square: FC<SquareRowProps> = ({
     useEffect(() => {
         if (cellSquare.backgroundColor === playerColor) {
             incrementPlayerScore();
+            callPlayerSound()
             // youFx.play();
         } else if (cellSquare.backgroundColor === machineColor) {
             incrementMachineScore();
+            // callOpponentSound()
             // opponentFx.play();
         }
     }, [cellSquare]);
@@ -80,10 +73,10 @@ const Square: FC<SquareRowProps> = ({
                 }
             } else {
                 if (machineDidClick) {
-
+                    // callOpponentSound()
                     // incrementMachineScore()
                 } else {
-
+                    // callPlayerSound()
                     // incrementPlayerScore()
                 }
 
