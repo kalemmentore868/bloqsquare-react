@@ -1,6 +1,13 @@
 import React, { memo } from "react";
 import { useGameContext } from "../../Context/GameContext";
 import Countdown from "react-countdown";
+import { Howl } from "howler";
+// const timeSFx = new Howl({
+//     src: ["./audio/background-music.wav"],
+//     html5: true,
+//     preload: true
+// });
+
 
 interface countdownProps {
     minutes: number;
@@ -9,11 +16,15 @@ interface countdownProps {
 }
 
 const Timer = () => {
-    //   const timeSFx = new Audio("./audio/background-music.wav");
+
     const { gameProperties, setGameProperties } = useGameContext();
 
+
+
+
+
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
-        // if (seconds % 4 == 0) timeSFx.play();
+        // if (seconds % 2 === 0) timeSFx.play();
         return (
             <time>
                 {minutes < 10 ? "0" + minutes : minutes}:
