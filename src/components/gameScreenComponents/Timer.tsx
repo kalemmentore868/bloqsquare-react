@@ -11,14 +11,14 @@ interface countdownProps {
 
 const Timer = () => {
 
-    const timeSFx = new Audio('./audio/background-music.wav');
+    // const timeSFx = new Audio('./audio/background-music.wav');
     const { gameProperties, setGameProperties } = useGameContext();
 
 
 
 
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
-        if (seconds % 2 === 0) timeSFx.play()
+        // if (seconds % 2 === 0) timeSFx.play()
         return <time>{minutes < 10 ? "0" + minutes : minutes}:{seconds < 10 ? "0" + seconds : seconds}:{milliseconds < 100 ? "0" + milliseconds : milliseconds < 10 ? "00" + milliseconds : milliseconds}</time>;
     };
 

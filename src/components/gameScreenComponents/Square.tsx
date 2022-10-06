@@ -65,10 +65,10 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
                 }
             } else {
                 if (machineDidClick) {
-                    opponentFx.play()
+                    // opponentFx.play()
                     // incrementMachineScore()
                 } else {
-                    youFx.play()
+                    // youFx.play()
                     // incrementPlayerScore()
                 }
 
@@ -80,8 +80,8 @@ const Square: FC<SquareRowProps> = ({ cell, incrementMachineScore, incrementPlay
 
 
 
-    const opponentFx = new Audio('./audio/opponent.wav')
-    const youFx = new Audio('./audio/you.wav')
+    // const opponentFx = new Audio('./audio/opponent.wav')
+    // const youFx = new Audio('./audio/you.wav')
 
 
 
