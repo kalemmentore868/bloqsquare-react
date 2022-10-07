@@ -27,6 +27,10 @@ const Timer: FC<timer> = ({ scores }) => {
     const dispatch = useAppDispatch()
     useEffect(() => {
         bgMusic.play()
+
+        return () => {
+            bgMusic.stop()
+        }
     }, [])
 
     const endGame = () => {
