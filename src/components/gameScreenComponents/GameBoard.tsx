@@ -2,6 +2,7 @@ import { FC, useRef } from 'react'
 import Grid2 from '../../helpers/Grid2'
 import TableRow from './TableRow'
 
+
 interface TableRowProps {
     incrementMachineScore: Function
     incrementPlayerScore: Function
@@ -13,6 +14,7 @@ const GameBoard: FC<TableRowProps> = ({ incrementMachineScore, incrementPlayerSc
 
 
     const grid = useRef(new Grid2(8, 8))
+
 
 
     return (

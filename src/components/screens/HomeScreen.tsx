@@ -5,15 +5,19 @@ import ColorPicker from '../homeScreenComponents/ColorPicker'
 import Versus from '../Versus'
 import Button from '../Button'
 import { useGameContext } from '../../Context/GameContext'
+import { useAppSelector, useAppDispatch } from '../../redux/redux-hooks'
+import { setPlayerColor } from '../../redux/player'
+import { RootState } from '../../redux/store'
+import { setMachineColor } from '../../redux/machine'
+import { incrementScreen } from '../../redux/screen'
 
 
 const HomeScreen = () => {
-  const [color, setColor] = useState("#ff0000")
-  const { setGameProperties } = useGameContext();
+  const player = useAppSelector((state) => state.player)
+  const machine = useAppSelector((state) => state.machine)
 
-  const choseColor = (colorPicked: string) => {
-    setColor(colorPicked)
-  }
+  const dispatch = useAppDispatch()
+
 
   function invertHex(hex: string) {
     hex = hex.substring(1);
@@ -24,16 +28,17 @@ const HomeScreen = () => {
     return `#${newHex}`;
   }
 
-  let machineColor = invertHex(color)
+  const choseColor = (colorPicked: string) => {
+    dispatch(setPlayerColor(colorPicked))
+    dispatch(setMachineColor(invertHex(player.chosenColor)))
+  }
+
+
 
   const play = () => {
 
-    setGameProperties({
-      playerColor: color,
-      machineColor: machineColor,
-      screen: 2
+    dispatch(incrementScreen())
 
-    })
   }
 
 
@@ -53,7 +58,7 @@ const HomeScreen = () => {
           </div>
           <div className="row">
             <div className="col s12">
-              <Versus colorPicked={color} machineColor={machineColor} />
+              <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} />
             </div></div>
           <div className="row">
             <div className="center-align col s12" onClick={play}>

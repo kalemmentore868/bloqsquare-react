@@ -13,6 +13,15 @@
   src: url(../public/fonts/Silom.ttf);
 }
 
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+}
+
 .materialize-red {
   background-color: #e51c23 !important;
 }

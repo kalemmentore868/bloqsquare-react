@@ -4,6 +4,7 @@ interface colorProps {
 }
 
 const ColorPicker: FC<colorProps> = ({ choseColor }) => {
+
   return (
     <label className="input-color" htmlFor="chosenColor">
       <input type="color" defaultValue={'#f50000'} name="chosenColor" onChange={e => choseColor(e.target.value)} />

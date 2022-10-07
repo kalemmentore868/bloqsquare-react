@@ -3,7 +3,9 @@ import Help from './components/Help';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameScreen from './components/screens/GameScreen';
 import HomeScreen from './components/screens/HomeScreen';
+import LoadingScreen from './components/screens/LoadingScreen';
 import { GameContext } from './Context/GameContext'
+import { useAppDispatch, useAppSelector } from './redux/redux-hooks';
 
 
 function App() {
@@ -14,34 +16,21 @@ function App() {
     screen: 1
   })
 
+  const { screen } = useAppSelector((state) => state)
+  const dispatch = useAppDispatch()
 
 
-  const scores = useRef({ playerScore: 0, machineScore: 0 })
 
 
 
-
-  const incrementPlayerScore = () => {
-    scores.current.playerScore++
-  }
-
-  const incrementMachineScore = () => {
-    scores.current.machineScore++
-  }
-
-  const { screen } = gameProperties
-  if (screen === 1) {
-    scores.current = { playerScore: 0, machineScore: 0 }
-  }
 
 
   return (
     <main className="App container valign-wrapper">
-      <GameContext.Provider value={{ gameProperties, setGameProperties }}>
-        {screen === 1 && <HomeScreen />}
-        {screen === 2 && <GameScreen incrementPlayerScore={incrementPlayerScore} incrementMachineScore={incrementMachineScore} />}
-        {screen === 3 && <GameOverScreen scores={scores.current} />}
-      </GameContext.Provider  >
+      {screen.value === 0 && <LoadingScreen />}
+      {screen.value === 1 && <HomeScreen />}
+      {screen.value === 2 && <GameScreen />}
+      {screen.value === 3 && <GameOverScreen />}
       <Help />
     </main>
 

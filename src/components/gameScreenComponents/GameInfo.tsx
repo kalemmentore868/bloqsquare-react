@@ -1,23 +1,23 @@
+import { FC } from "react"
 import Logo from "../Logo";
 import Score from "./Score";
 import Timer from "./Timer";
 import { Howl } from "howler";
+import { useAppSelector } from "../../redux/redux-hooks";
 
-
-const GameInfo = () => {
-  const timeSFx = new Howl({
-    src: ["./audio/background-music.wav"],
-    html5: true,
-    preload: true,
-    loop: true,
-    volume: 0.25
-  });
-
-  timeSFx.play()
-
-  const stopBgMusic = () => {
-    timeSFx.stop()
+interface gameInfo {
+  scores: {
+    playerScore: number;
+    machineScore: number;
   }
+}
+
+const GameInfo: FC<gameInfo> = ({ scores }) => {
+
+  // const { bgMusic } = useAppSelector(state => state.audio)
+
+  // bgMusic.play()
+
   return (
     <article>
       <header>
@@ -26,7 +26,7 @@ const GameInfo = () => {
 
       <header className="container-fluid">
         <div className="dashboard row">
-          <Timer stopBgMusic={stopBgMusic} />
+          <Timer scores={scores} />
           <Score />
         </div>
       </header>

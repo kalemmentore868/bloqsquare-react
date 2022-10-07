@@ -1,17 +1,25 @@
-import { FC } from "react"
+import { FC, useRef } from "react"
+import { useAppSelector } from "../../redux/redux-hooks"
 import GameBoard from '../gameScreenComponents/GameBoard'
 import GameInfo from '../gameScreenComponents/GameInfo'
 
-interface GameScreenProps {
-  incrementMachineScore: Function
-  incrementPlayerScore: Function
+const GameScreen = () => {
 
-}
+  const scores = useRef({ playerScore: 0, machineScore: 0 })
 
-const GameScreen: FC<GameScreenProps> = ({ incrementMachineScore, incrementPlayerScore }) => {
+
+
+  const incrementPlayerScore = () => {
+    scores.current.playerScore++
+  }
+
+  const incrementMachineScore = () => {
+    scores.current.machineScore++
+  }
+
   return (
     <section className='game'>
-      <GameInfo />
+      <GameInfo scores={scores.current} />
       <GameBoard incrementPlayerScore={incrementPlayerScore} incrementMachineScore={incrementMachineScore} />
     </section>
   )

@@ -6,6 +6,7 @@ export default class Grid2 {
   rows: number;
   numberOfCells: number;
   numberOfUnlickedCells: number;
+  allCells: Cell[];
 
   constructor(cols: number, rows: number) {
     this.cols = cols;
@@ -13,12 +14,14 @@ export default class Grid2 {
     this.numberOfCells = cols * rows;
     this.numberOfUnlickedCells = this.numberOfCells;
     this.rowList = [];
+    this.allCells = [];
 
     let count = 0;
     let row = [];
 
     for (let i = 0; i < this.numberOfCells; i++) {
       let cell = new Cell(i);
+      this.allCells.push(cell);
       row.push(cell);
       count++;
       if (count === cols) {

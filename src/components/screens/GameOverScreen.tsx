@@ -1,26 +1,27 @@
 import { FC } from "react";
 import { useGameContext } from "../../Context/GameContext";
+import { setMachineScore } from "../../redux/machine";
+import { setPlayerScore } from "../../redux/player";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
+import { incrementScreen } from "../../redux/screen";
 import Button from "../Button";
 import Logo from "../Logo";
 import Versus from "../Versus";
 
-interface GameOverScreenProps {
-    scores: {
-        playerScore: number,
-        machineScore: number
-    }
-}
 
-const GameOverScreen: FC<GameOverScreenProps> = ({ scores }) => {
-    const { gameProperties, setGameProperties } = useGameContext();
+const GameOverScreen = () => {
 
-    const audioSFx = new Audio('./audio/end.wav');
-    audioSFx.play();
+
+    const player = useAppSelector((state) => state.player)
+    const machine = useAppSelector((state) => state.machine)
+    const { endAudio } = useAppSelector(state => state.audio)
+    const dispatch = useAppDispatch()
 
     const restartGame = () => {
-        setGameProperties({
-            ...gameProperties, screen: 1
-        })
+        endAudio.play()
+        dispatch(incrementScreen())
+        dispatch(setPlayerScore(0))
+        dispatch(setMachineScore(0))
     }
 
     return (
@@ -41,7 +42,7 @@ const GameOverScreen: FC<GameOverScreenProps> = ({ scores }) => {
             <article>
                 <div className="container-fluid">
                     <div className="row">
-                        <Versus colorPicked={gameProperties.playerColor} machineColor={gameProperties.machineColor} playerScore={scores.playerScore} machineScore={scores.machineScore} />
+                        <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} playerScore={player.totalPoints} machineScore={machine.totalPoints} />
                     </div>
                     <div className="row">
                         <div className="center-align col s12">

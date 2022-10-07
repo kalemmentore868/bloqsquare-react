@@ -1,6 +1,10 @@
-import React, { memo, FC } from "react";
+import React, { memo, FC, useEffect } from "react";
 import { useGameContext } from "../../Context/GameContext";
 import Countdown from "react-countdown";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
+import { incrementScreen } from "../../redux/screen";
+import { setMachineScore } from "../../redux/machine";
+import { setPlayerScore } from "../../redux/player";
 
 
 
@@ -11,16 +15,27 @@ interface countdownProps {
 }
 
 interface timer {
-    stopBgMusic: Function
+    scores: {
+        playerScore: number;
+        machineScore: number;
+    }
 }
 
-const Timer: FC<timer> = ({ stopBgMusic }) => {
 
-    const { gameProperties, setGameProperties } = useGameContext();
+const Timer: FC<timer> = ({ scores }) => {
+
+    const { bgMusic } = useAppSelector(state => state.audio)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        bgMusic.play()
+    }, [])
 
     const endGame = () => {
-        stopBgMusic()
-        setGameProperties({ ...gameProperties, screen: 3 })
+        bgMusic.stop()
+        dispatch(incrementScreen())
+        dispatch(setMachineScore(scores.machineScore))
+        dispatch(setPlayerScore(scores.playerScore))
+
     }
 
 
