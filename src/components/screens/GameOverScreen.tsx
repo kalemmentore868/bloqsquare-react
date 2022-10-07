@@ -44,7 +44,7 @@ const GameOverScreen = () => {
                     </div>
                     <div className="row">
                         <div className="center-align col s12">
-                            <span onClick={() => restartGame()}>
+                            <span onDoubleClick={() => restartGame()}>
                                 <Button text='Play Again' />
                             </span>
                         </div>
