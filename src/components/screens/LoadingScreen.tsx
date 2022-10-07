@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { useAppDispatch } from '../../redux/redux-hooks';
 import { incrementScreen } from '../../redux/screen';
-import Button from '../Button';
+
 
 const LoadingScreen = () => {
     let [loading, setLoading] = useState(true);

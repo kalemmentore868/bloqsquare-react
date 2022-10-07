@@ -1,5 +1,3 @@
-import { FC } from "react";
-import { useGameContext } from "../../Context/GameContext";
 import { setMachineScore } from "../../redux/machine";
 import { setPlayerScore } from "../../redux/player";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";

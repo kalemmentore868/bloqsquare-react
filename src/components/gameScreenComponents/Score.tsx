@@ -1,12 +1,9 @@
-import { useEffect, useState, useRef } from "react";
-import { useGameContext } from "../../Context/GameContext";
+import { useEffect, useState, useRef } from "react";;
 import Grid2 from "../../helpers/Grid2";
 import { useAppSelector } from "../../redux/redux-hooks";
 
 const Score = () => {
   const [score, setScore] = useState(0);
-  // const { gameProperties } = useGameContext();
-  // const { playerColor } = gameProperties;
   const player = useAppSelector((state) => state.player)
   const playerColor = player.chosenColor
   const grid = useRef(new Grid2(8, 8));

@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from "react";
-import { useGameContext } from "../../Context/GameContext";
 import Cell from "../../helpers/Cell";
 import Player from "../../helpers/Player";
 import { useAppSelector } from "../../redux/redux-hooks";
@@ -24,13 +23,10 @@ const Square: FC<SquareRowProps> = ({
     incrementPlayerScore
 }) => {
     const [cellSquare, setCellSquare] = useState(cell);
-    // const { gameProperties } = useGameContext();
-
-    // const { playerColor, machineColor } = gameProperties;
 
     const player = useAppSelector((state) => state.player)
     const machine = useAppSelector((state) => state.machine)
-    const { playerMusic, opponentMusic } = useAppSelector(state => state.audio)
+    const { playerMusic } = useAppSelector(state => state.audio)
 
     //for a random square to be coloured
     useEffect(() => {

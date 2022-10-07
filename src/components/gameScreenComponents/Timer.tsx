@@ -1,5 +1,4 @@
-import React, { memo, FC, useEffect } from "react";
-import { useGameContext } from "../../Context/GameContext";
+import { memo, FC, useEffect } from "react";
 import Countdown from "react-countdown";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { incrementScreen } from "../../redux/screen";

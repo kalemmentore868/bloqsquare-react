@@ -1,13 +1,10 @@
-import { useState } from 'react'
 import Logo from '../Logo'
 import Heading from '../homeScreenComponents/Heading'
 import ColorPicker from '../homeScreenComponents/ColorPicker'
 import Versus from '../Versus'
 import Button from '../Button'
-import { useGameContext } from '../../Context/GameContext'
 import { useAppSelector, useAppDispatch } from '../../redux/redux-hooks'
 import { setPlayerColor } from '../../redux/player'
-import { RootState } from '../../redux/store'
 import { setMachineColor } from '../../redux/machine'
 import { incrementScreen } from '../../redux/screen'
 

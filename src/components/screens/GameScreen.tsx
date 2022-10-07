@@ -1,5 +1,4 @@
-import { FC, useRef } from "react"
-import { useAppSelector } from "../../redux/redux-hooks"
+import { useRef } from "react"
 import GameBoard from '../gameScreenComponents/GameBoard'
 import GameInfo from '../gameScreenComponents/GameInfo'
 
