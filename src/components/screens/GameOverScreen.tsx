@@ -13,10 +13,11 @@ const GameOverScreen = () => {
     const player = useAppSelector((state) => state.player)
     const machine = useAppSelector((state) => state.machine)
     const { endAudio } = useAppSelector(state => state.audio)
+    endAudio.play()
     const dispatch = useAppDispatch()
 
     const restartGame = () => {
-        endAudio.play()
+
         dispatch(incrementScreen())
         dispatch(setPlayerScore(0))
         dispatch(setMachineScore(0))
