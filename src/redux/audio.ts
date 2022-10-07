@@ -6,7 +6,6 @@ const timeSFx = new Howl({
   src: ["./audio/background-music.wav"],
   html5: true,
   preload: true,
-  loop: true,
   volume: 0.25,
 });
 
@@ -19,6 +18,7 @@ const youFx = new Howl({
   src: ["./audio/you.wav"],
   html5: true,
   preload: true,
+  volume: 1,
 });
 
 const endAudio = new Howl({

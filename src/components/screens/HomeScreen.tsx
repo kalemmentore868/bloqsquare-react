@@ -50,7 +50,7 @@ const HomeScreen = () => {
         <div className='container'>
           <div className="row">
             <div className="col s12 center-align">
-              <ColorPicker choseColor={choseColor} />
+              <ColorPicker choseColor={choseColor} value={player.chosenColor} />
             </div>
           </div>
           <div className="row">

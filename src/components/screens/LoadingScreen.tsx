@@ -19,8 +19,14 @@ const LoadingScreen = () => {
         ]
 
         cacheMedia(media)
+        // someRequest().then(() => {
+        //     setLoading(false)
+        // })
 
     }, [])
+    // function someRequest() { //Simulates a request; makes a "promise" that'll run for 2.5 seconds
+    //     return new Promise<void>(resolve => setTimeout(() => resolve(), 2500));
+    // }
 
     const cacheMedia = async (media: string[]) => {
         const promises = await media.map((src) => {
@@ -35,7 +41,13 @@ const LoadingScreen = () => {
         })
 
         await Promise.all(promises)
-        setLoading(false)
+        setTimeout(() => {
+
+            setLoading(false)
+        }, 2500)
+
+
+
     }
 
 

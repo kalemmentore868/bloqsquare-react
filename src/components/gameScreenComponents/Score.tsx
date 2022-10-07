@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";;
-import Grid2 from "../../helpers/Grid2";
+import { useEffect, useState, useRef } from "react";
 import { useAppSelector } from "../../redux/redux-hooks";
+import Grid2 from "../../helpers/Grid2";
+
 
 const Score = () => {
   const [score, setScore] = useState(0);

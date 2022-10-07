@@ -12,8 +12,8 @@ const GameOverScreen = () => {
 
     const player = useAppSelector((state) => state.player)
     const machine = useAppSelector((state) => state.machine)
-    const { endAudio } = useAppSelector(state => state.audio)
-    endAudio.play()
+
+
     const dispatch = useAppDispatch()
 
     const restartGame = () => {
@@ -45,7 +45,7 @@ const GameOverScreen = () => {
                     </div>
                     <div className="row">
                         <div className="center-align col s12">
-                            <span onDoubleClick={() => restartGame()}>
+                            <span onClick={restartGame}>
                                 <Button text='Play Again' />
                             </span>
                         </div>

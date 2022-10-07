@@ -1,4 +1,4 @@
-import { memo, FC, useEffect } from "react";
+import { memo, FC, useEffect, useRef } from "react";
 import Countdown from "react-countdown";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { incrementScreen } from "../../redux/screen";
@@ -23,18 +23,31 @@ interface timer {
 
 const Timer: FC<timer> = ({ scores }) => {
 
-    const { bgMusic } = useAppSelector(state => state.audio)
+    const { bgMusic, endAudio } = useAppSelector(state => state.audio)
     const dispatch = useAppDispatch()
+
+    const clockRef = useRef();
+    // @ts-ignore
+    const handleStart = () => clockRef.current.start();
+    // const handlePause = () => clockRef.current.pause();
+
     useEffect(() => {
-        bgMusic.play()
+
+        let timer: number
+
+        setTimeout(() => {
+            timer = window.setInterval(() => bgMusic.play(), 2000)
+            handleStart()
+        }, 300)
+
 
         return () => {
-            bgMusic.stop()
+            clearInterval(timer)
         }
     }, [])
 
     const endGame = () => {
-        bgMusic.stop()
+        endAudio.play()
         dispatch(incrementScreen())
         dispatch(setMachineScore(scores.machineScore))
         dispatch(setPlayerScore(scores.playerScore))
@@ -43,6 +56,8 @@ const Timer: FC<timer> = ({ scores }) => {
 
 
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
+
+
 
         return (
             <time>
@@ -60,11 +75,13 @@ const Timer: FC<timer> = ({ scores }) => {
             <div className="clock pink-text">
                 {" "}
                 <Countdown
+                    ref={clockRef}
                     date={Date.now() + 25000}
                     intervalDelay={0}
                     precision={3}
                     renderer={renderer}
                     onComplete={endGame}
+                    autoStart={false}
                 />
             </div>
         </div>
