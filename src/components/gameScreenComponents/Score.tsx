@@ -2,19 +2,17 @@ import { useEffect, useState, useRef } from "react";
 import { useAppSelector } from "../../redux/redux-hooks";
 import Grid2 from "../../helpers/Grid2";
 
-
 const Score = () => {
   const [score, setScore] = useState(0);
-  const player = useAppSelector((state) => state.player)
-  const playerColor = player.chosenColor
+  const player = useAppSelector((state) => state.player);
+  const playerColor = player.chosenColor;
   const grid = useRef(new Grid2(8, 8));
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-
       let square = event.target as HTMLSpanElement;
 
-      let squarePressed = grid.current.allCells[parseInt(square.id)]
+      let squarePressed = grid.current.allCells[parseInt(square.id)];
 
       const opponentSquareClicked =
         getComputedStyle(square).getPropertyValue("--color") === "transparent";
@@ -32,7 +30,7 @@ const Score = () => {
         opponentSquareClicked &&
         squarePressed.isClicked === true
       ) {
-        squarePressed.isClicked = false
+        squarePressed.isClicked = false;
       }
     };
 
@@ -45,7 +43,7 @@ const Score = () => {
 
   return (
     <div className="center-align col s12">
-      <div className="points yellow-text">
+      <div className="points yellow-text silom">
         <div>
           <span id="points">{score}</span>pts.
         </div>

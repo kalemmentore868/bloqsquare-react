@@ -1,16 +1,31 @@
 @font-face {
-  font-family: Owners;
-  src: url(../public/fonts/OwnersRegular.ttf);
+  font-family: "Roboto";
+  src: url("../public/fonts/Roboto-Regular.woff2") format("woff2"),
+    url("../public/fonts/Roboto-Regular.woff") format("woff"),
+    url("../public/fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: Roboto;
-  src: url(../public/fonts/Roboto-Regular.ttf);
+  font-family: "Owners";
+  src: url("../public/fonts/Owners-Regular.woff2") format("woff2"),
+    url("../public/fonts/Owners-Regular.woff") format("woff"),
+    url("../public/fonts/Owners-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: Silom;
-  src: url(../public/fonts/Silom.ttf);
+  font-family: "Silom";
+  src: url("../public/fonts/Silom.woff2") format("woff2"),
+    url("../public/fonts/Silom.woff") format("woff"),
+    url("../public/fonts/Silom.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 .loading-screen {
@@ -5113,15 +5128,12 @@ table.grid-10 .color {
   font-size: 2rem;
   display: flex;
 }
+
 .clock {
-  text-align: center;
   text-shadow: -1px -2px #00000080, -1px 0 #ffffff4d;
   color: #0000;
-  place-content: center;
-  padding: 10px 8px 0;
+  text-align: center;
   font-size: 3rem;
-  line-height: 1.3;
-  display: flex;
 }
 .points {
   color: #0006;
@@ -5137,22 +5149,25 @@ table.grid-10 .color {
   font-size: 2.5rem;
 }
 .help {
-  height: 100vh;
+  max-height: 85vh;
   color: #000;
-  background-color: #000c;
-  justify-content: center;
-  align-items: center;
+  border-radius: 10px;
   padding: 5%;
   font-size: 1.3rem;
   display: flex;
   position: absolute;
-  inset: 0;
+  margin: 5% 0;
+  overflow: hidden;
+  overflow-y: scroll;
+  z-index: 45;
+  left: 0;
+  top: 0;
 }
-.help .row {
-  width: inherit;
-  height: auto;
+
+.help {
+  height: inherit;
+  width: auto;
   background-color: #ffeb3b;
-  border-radius: 7px;
 }
 @media screen and (min-width: 680px) {
   .help .row .logo-md {
@@ -5166,7 +5181,7 @@ table.grid-10 .color {
   border-radius: 100%;
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 1.5em;
 }
 .open-help .link {
   width: 100%;
@@ -5295,7 +5310,7 @@ main > section {
   }
 }
 
-@media screen and (orientation: portrait) and (max-width: 468px) {
+@media screen and (orientation: portrait) and (max-height: 569px) {
   html,
   body {
     overflow: hidden;
@@ -5307,22 +5322,41 @@ main > section {
     overscroll-behavior-y: auto;
   }
 
-  main.valign-wrapper {
-    align-items: flex-start;
+  main.App {
+    perspective: 1000px;
+    perspective-origin: center;
+  }
+
+  main.valign-wrapper > section {
+    margin-top: -5%;
+    align-items: top;
+    transform: translateZ(-120px);
   }
 
   .game article header .row {
     margin-bottom: 0;
   }
 
+  .game .logo {
+    width: 25%;
+    margin-bottom: 10px;
+  }
+
   .logo {
     width: 75%;
+  }
+
+  .home h2 {
+    font-size: 1.2rem;
   }
 
   .clock {
     font-size: 2rem;
     line-height: 1.3rem;
-    padding: 12px 8px 4px;
+  }
+
+  .clock time {
+    display: block;
   }
 
   .points {
