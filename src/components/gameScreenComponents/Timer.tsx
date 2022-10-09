@@ -50,17 +50,11 @@ const Timer: FC<timer> = ({ scores }) => {
   const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
     return (
       <time>
-        {(minutes < 10 ? "0" + minutes : minutes)
-          .toString()
-          .concat(
-            " : ",
-            (seconds < 10 ? "0" + seconds : seconds).toString(),
-            " : ",
-            (milliseconds < 100
-              ? "0".concat(Math.round(milliseconds / 10).toString())
-              : Math.round(milliseconds / 10)
-            ).toString()
-          )}
+        {minutes < 10 ? "0" + minutes : minutes} :
+        {seconds < 10 ? "0" + seconds : seconds} :
+        {milliseconds < 100
+          ? "0".concat(Math.round(milliseconds / 10).toString())
+          : Math.round(milliseconds / 10)}
       </time>
     );
   };
