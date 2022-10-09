@@ -5133,6 +5133,7 @@ table.grid-10 .color {
   text-shadow: -1px -2px #00000080, -1px 0 #ffffff4d;
   color: #0000;
   text-align: center;
+  font-size: 3rem;
 }
 .points {
   color: #0006;
@@ -5326,18 +5327,27 @@ main > section {
     perspective-origin: center;
   }
 
-  main.valign-wrapper > section.home {
+  main.valign-wrapper > section {
     margin-top: -5%;
     align-items: top;
-    transform: translateZ(-300px);
+    transform: translateZ(-120px);
   }
 
   .game article header .row {
     margin-bottom: 0;
   }
 
+  .game .logo {
+    width: 25%;
+    margin-bottom: 10px;
+  }
+
   .logo {
     width: 75%;
+  }
+
+  .home h2 {
+    font-size: 1.2rem;
   }
 
   .clock {
