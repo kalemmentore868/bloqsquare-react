@@ -41,11 +41,10 @@ const Timer: FC<timer> = ({ scores }) => {
   }, []);
 
   const endGame = () => {
-    handleStart();
-    /* endAudio.play();
+    endAudio.play();
     dispatch(incrementScreen());
     dispatch(setMachineScore(scores.machineScore));
-    dispatch(setPlayerScore(scores.playerScore)); */
+    dispatch(setPlayerScore(scores.playerScore));
   };
 
   const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
