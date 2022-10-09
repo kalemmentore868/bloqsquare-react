@@ -1,16 +1,31 @@
 @font-face {
-  font-family: Owners;
-  src: url(../public/fonts/OwnersRegular.ttf);
+  font-family: "Roboto";
+  src: url("../public/fonts/Roboto-Regular.woff2") format("woff2"),
+    url("../public/fonts/Roboto-Regular.woff") format("woff"),
+    url("../public/fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: Roboto;
-  src: url(../public/fonts/Roboto-Regular.ttf);
+  font-family: "Owners";
+  src: url("../public/fonts/Owners-Regular.woff2") format("woff2"),
+    url("../public/fonts/Owners-Regular.woff") format("woff"),
+    url("../public/fonts/Owners-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: Silom;
-  src: url(../public/fonts/Silom.ttf);
+  font-family: "Silom";
+  src: url("../public/fonts/Silom.woff2") format("woff2"),
+    url("../public/fonts/Silom.woff") format("woff"),
+    url("../public/fonts/Silom.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 .loading-screen {
@@ -5295,7 +5310,7 @@ main > section {
   }
 }
 
-@media screen and (orientation: portrait) and (max-width: 468px) {
+@media screen and (orientation: portrait) and (max-height: 569px) {
   html,
   body {
     overflow: hidden;
@@ -5307,8 +5322,15 @@ main > section {
     overscroll-behavior-y: auto;
   }
 
-  main.valign-wrapper {
-    align-items: flex-start;
+  main.App {
+    perspective: 1000px;
+    perspective-origin: center;
+  }
+
+  main.valign-wrapper > section {
+    margin-top: -5%;
+    align-items: top;
+    transform: translateZ(-300px);
   }
 
   .game article header .row {
