@@ -13,6 +13,9 @@ interface gameInfo {
 const GameInfo: FC<gameInfo> = ({ scores }) => {
   return (
     <article>
+      <header>
+        <Logo />
+      </header>
       <header className="container-fluid">
         <div className="dashboard row">
           <Timer scores={scores} />
