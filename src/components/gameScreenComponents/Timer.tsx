@@ -76,7 +76,7 @@ const Timer: FC<timer> = ({ scores }) => {
           intervalDelay={0}
           precision={2}
           renderer={renderer}
-          //onComplete={endGame}
+          onComplete={endGame}
           autoStart={false}
         />
       </div>
