@@ -3,6 +3,7 @@ import playerReducer from "./player";
 import machineReducer from "./machine";
 import screenReducer from "./screen";
 import audioReducer from "./audio";
+import gameDataReducer from "./gameData";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     machine: machineReducer,
     screen: screenReducer,
     audio: audioReducer,
+    gameData: gameDataReducer,
   },
 });
 
