@@ -17,7 +17,6 @@ export interface LevelData {
 export interface GameData {
   levels: LevelData[];
   currentLevel: number;
-  grid: Grid2;
 }
 
 // @ts-ignore
@@ -27,7 +26,6 @@ const levels = [{ level: 1, grid: { x: 1, y: 1 } }];
 const initialState: GameData = {
   levels,
   currentLevel: 0,
-  grid: new Grid2(14, 7),
 };
 
 const gameDataSlice = createSlice({
@@ -39,7 +37,7 @@ const gameDataSlice = createSlice({
     },
     setGameData: (state, action: PayloadAction<LevelData[]>) => {
       const { x, y } = action.payload[state.currentLevel].grid;
-      return { ...state, levels: action.payload, grid: new Grid2(x, y) };
+      return { ...state, levels: action.payload };
     },
   },
 });

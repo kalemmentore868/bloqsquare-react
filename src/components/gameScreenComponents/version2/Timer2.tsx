@@ -17,6 +17,12 @@ interface timer {
     levelData: LevelData
 }
 
+function areEqual(prevProps: timer, nextProps: timer) {
+    {
+        return prevProps.levelData.level === nextProps.levelData.level
+    }
+}
+
 const Timer2: FC<timer> = ({ levelData }) => {
     const { bgMusic, endAudio } = useAppSelector((state) => state.audio);
     const dispatch = useAppDispatch();
@@ -33,9 +39,9 @@ const Timer2: FC<timer> = ({ levelData }) => {
 
         setTimeout(() => {
             timer = window.setInterval(() => bgMusic.play(), 2000);
-
+            handleStart();
         }, 300);
-        handleStart();
+
 
         return () => {
             clearInterval(timer);

@@ -14,11 +14,11 @@ interface TableRowProps {
 
 
 const GameBoard2: FC<TableRowProps> = ({ gameData }) => {
-    const { grid, levels, currentLevel } = gameData
-    const [board, setBoard] = useState(grid.rowList)
+    const { levels, currentLevel } = gameData
+    const [board, setBoard] = useState(new Grid2(7, 14).rowList)
+    console.log("board", board)
     const player = useAppSelector(state => state.player)
     const machine = useAppSelector(state => state.machine)
-    const dispatch = useAppDispatch()
     const colors = { playerColor: player.chosenColor, machineColor: machine.chosenColor }
 
 

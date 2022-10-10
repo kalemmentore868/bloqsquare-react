@@ -11,7 +11,7 @@ interface TableRowProps {
 
 function areEqual(prevProps: TableRowProps, nextProps: TableRowProps) {
     {
-        return prevProps.row.every(function (cell, i) {
+        return prevProps.row.length === nextProps.row.length && prevProps.row.every(function (cell, i) {
             return cell.backgroundColor === nextProps.row[i].backgroundColor
         })
     }
@@ -19,7 +19,7 @@ function areEqual(prevProps: TableRowProps, nextProps: TableRowProps) {
 
 const TableRow2: FC<TableRowProps> = ({ row, rowNum, colors, handleSquareClick }) => {
 
-    console.log("row rerendering")
+
     return (
         <tr>
             {row.map(cell => {
@@ -32,3 +32,4 @@ const TableRow2: FC<TableRowProps> = ({ row, rowNum, colors, handleSquareClick }
 }
 
 export default memo(TableRow2, areEqual)
+// export default TableRow2
