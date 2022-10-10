@@ -1,85 +1,69 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useEffect, memo } from "react";
 import Cell from "../../helpers/Cell";
-import Player from "../../helpers/Player";
-import { useAppSelector } from "../../redux/redux-hooks";
+import { incrementMachineScore } from "../../redux/machine";
+import { incrementPlayerScore } from "../../redux/player";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 
 
 
 interface SquareRowProps {
     cell: Cell;
-    incrementMachineScore: Function;
-    incrementPlayerScore: Function;
-    callOpponentSound: Function;
-    callPlayerSound: Function;
+    rowNum: number
+    colors: colors
+    handleSquareClick: Function
 }
 
-function generateRandomInteger(max: number): number {
-    return Math.floor(Math.random() * max);
+export interface colors {
+    playerColor: string, machineColor: string
+}
+
+export interface squareInfo {
+    colors: colors
+    rowNum: number
+    squareId: number
+}
+
+function areEqual(prevProps: SquareRowProps, nextProps: SquareRowProps) {
+    return prevProps.cell.backgroundColor === nextProps.cell.backgroundColor;
 }
 
 const Square: FC<SquareRowProps> = ({
     cell,
-    incrementMachineScore,
-    incrementPlayerScore
+    rowNum,
+    colors,
+    handleSquareClick
+
 }) => {
-    const [cellSquare, setCellSquare] = useState(cell);
+    const dispatch = useAppDispatch()
+    const { playerMusic, opponentMusic } = useAppSelector(state => state.audio)
 
-    const player = useAppSelector((state) => state.player)
-    const machine = useAppSelector((state) => state.machine)
-    const { playerMusic } = useAppSelector(state => state.audio)
-
-    //for a random square to be coloured
     useEffect(() => {
-        const computerInterval = setInterval(() => {
-            const randomIndex = generateRandomInteger(64);
+        if (cell.backgroundColor === colors.playerColor) {
+            playerMusic.play()
+            dispatch(incrementPlayerScore())
+        } else if (cell.backgroundColor === colors.machineColor) {
+            opponentMusic.play()
+            dispatch(incrementMachineScore())
+        }
 
-            if (cellSquare.index === randomIndex) {
-                handleSquareClicked(machine, player);
-            }
-        }, 300);
-
-        return () => clearInterval(computerInterval);
-    }, []);
-
-    const handleSquareClicked = (player: Player, opponent: Player) => {
-        setCellSquare(prevState => {
-            if (prevState.isClicked) {
-                if (prevState.backgroundColor === opponent.chosenColor) {
-                    return { ...prevState, backgroundColor: "transparent", isClicked: false }
-                } else {
-                    // if (!player.isComputer) decrementPlayerScore()
-                    return prevState //here is where to put d code for if a player click his own square
-                }
-            } else {
-                if (player.isComputer) {
-                    // opponentFx.play()
-                    incrementMachineScore()
-                    // opponentMusic.play()
-                } else {
-                    // youFx.play()
-                    playerMusic.play()
-                    incrementPlayerScore()
-                }
-                return { ...prevState, backgroundColor: player.chosenColor, isClicked: true }
-            }
-        })
-    }
+    }, [cell.backgroundColor]);
 
 
     const squareClicked = () => {
-        handleSquareClicked(player, machine);
+
+        handleSquareClick(rowNum, cell.index, colors.playerColor, colors.machineColor)
     };
 
     return (
         <td
             className="color"
-            key={cellSquare.index}
-            style={{ "--color": cellSquare.backgroundColor } as React.CSSProperties}
+            key={cell.index}
+            style={{ "--color": cell.backgroundColor } as React.CSSProperties}
             onClick={squareClicked}
         >
-            <span id={`${cellSquare.index}`} className="square"></span>
+            <span id={`${cell.index}`} className="square"></span>
         </td>
     );
 };
 
-export default Square;
+export default memo(Square, areEqual);

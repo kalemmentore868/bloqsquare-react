@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  colors,
-  squareInfo,
-} from "../components/gameScreenComponents/version2/Square2";
+import { colors, squareInfo } from "../components/gameScreenComponents/Square";
 import Cell from "../helpers/Cell";
 import Grid2 from "../helpers/Grid2";
 
@@ -33,10 +30,12 @@ const gameDataSlice = createSlice({
   initialState,
   reducers: {
     incrementLevel: (state) => {
-      return { ...state, currentLevel: state.currentLevel + 1 };
+      return {
+        ...state,
+        currentLevel: state.currentLevel === 7 ? 0 : state.currentLevel + 1,
+      };
     },
     setGameData: (state, action: PayloadAction<LevelData[]>) => {
-      const { x, y } = action.payload[state.currentLevel].grid;
       return { ...state, levels: action.payload };
     },
   },

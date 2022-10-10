@@ -13,14 +13,17 @@ interface countdownProps {
 }
 
 interface timer {
-    scores: {
-        playerScore: number;
-        machineScore: number;
-    };
+
     levelData: LevelData
 }
 
-const Timer: FC<timer> = ({ scores, levelData }) => {
+function areEqual(prevProps: timer, nextProps: timer) {
+    {
+        return prevProps.levelData.level === nextProps.levelData.level
+    }
+}
+
+const Timer: FC<timer> = ({ levelData }) => {
     const { bgMusic, endAudio } = useAppSelector((state) => state.audio);
     const dispatch = useAppDispatch();
     const { level } = levelData
@@ -28,7 +31,8 @@ const Timer: FC<timer> = ({ scores, levelData }) => {
     const clockRef = useRef();
     // @ts-ignore
     const handleStart = () => clockRef.current.start();
-    // const handlePause = () => clockRef.current.pause();
+    // @ts-ignore
+    const handleStop = () => clockRef.current.stop();
 
     useEffect(() => {
         let timer: number;
@@ -36,23 +40,32 @@ const Timer: FC<timer> = ({ scores, levelData }) => {
         setTimeout(() => {
             timer = window.setInterval(() => bgMusic.play(), 2000);
             handleStart();
-        }, 300);
+        }, 150);
+
 
         return () => {
             clearInterval(timer);
         };
-    }, []);
+    }, [level]);
 
     const endGame = () => {
         endAudio.play();
         dispatch(incrementScreen());
-        dispatch(setMachineScore(scores.machineScore));
-        dispatch(setPlayerScore(scores.playerScore));
     };
 
     const endLevel = () => {
-        if (level === 7) endGame()
+        if (level === 7) {
+            endGame()
+        } else {
+            handleStop()
+
+            dispatch(setPlayerScore(0))
+            dispatch(setMachineScore(0))
+        }
         dispatch(incrementLevel())
+
+
+
     }
 
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
@@ -73,7 +86,7 @@ const Timer: FC<timer> = ({ scores, levelData }) => {
                 {" "}
                 <Countdown
                     ref={clockRef}
-                    date={Date.now() + 3000}
+                    date={Date.now() + 50000}
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}
@@ -85,4 +98,4 @@ const Timer: FC<timer> = ({ scores, levelData }) => {
     );
 };
 
-export default memo(Timer);
+export default memo(Timer, areEqual);
