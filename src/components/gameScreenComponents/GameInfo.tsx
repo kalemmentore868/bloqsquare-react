@@ -23,7 +23,7 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
 
     useEffect(() => {
         if (!gamePlaying) {
-            if (player.totalPoints >= grade) {
+            if (player.totalPoints >= grade / 5) {
                 dispatch(incrementLevel())
                 dispatch(setPlayerScore(0))
                 dispatch(setMachineScore(0))

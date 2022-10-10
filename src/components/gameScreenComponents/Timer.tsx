@@ -83,7 +83,7 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
                 {" "}
                 <Countdown
                     ref={clockRef}
-                    date={Date.now() + 5000}
+                    date={Date.now() + 30000}
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}
