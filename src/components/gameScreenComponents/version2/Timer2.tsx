@@ -1,10 +1,10 @@
 import { memo, FC, useEffect, useRef } from "react";
 import Countdown from "react-countdown";
-import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
-import { incrementScreen } from "../../redux/screen";
-import { setMachineScore } from "../../redux/machine";
-import { setPlayerScore } from "../../redux/player";
-import { incrementLevel, LevelData } from "../../redux/gameData";
+import { useAppDispatch, useAppSelector } from "../../../redux/redux-hooks";
+import { incrementScreen } from "../../../redux/screen";
+import { setMachineScore } from "../../../redux/machine";
+import { setPlayerScore } from "../../../redux/player";
+import { incrementLevel, LevelData } from "../../../redux/gameData";
 
 interface countdownProps {
     minutes: number;
@@ -13,14 +13,11 @@ interface countdownProps {
 }
 
 interface timer {
-    scores: {
-        playerScore: number;
-        machineScore: number;
-    };
+
     levelData: LevelData
 }
 
-const Timer: FC<timer> = ({ scores, levelData }) => {
+const Timer2: FC<timer> = ({ levelData }) => {
     const { bgMusic, endAudio } = useAppSelector((state) => state.audio);
     const dispatch = useAppDispatch();
     const { level } = levelData
@@ -28,31 +25,36 @@ const Timer: FC<timer> = ({ scores, levelData }) => {
     const clockRef = useRef();
     // @ts-ignore
     const handleStart = () => clockRef.current.start();
-    // const handlePause = () => clockRef.current.pause();
+    // @ts-ignore
+    const handleStop = () => clockRef.current.stop();
 
     useEffect(() => {
         let timer: number;
 
         setTimeout(() => {
             timer = window.setInterval(() => bgMusic.play(), 2000);
-            handleStart();
+
         }, 300);
+        handleStart();
 
         return () => {
             clearInterval(timer);
         };
-    }, []);
+    }, [level]);
 
     const endGame = () => {
         endAudio.play();
         dispatch(incrementScreen());
-        dispatch(setMachineScore(scores.machineScore));
-        dispatch(setPlayerScore(scores.playerScore));
     };
 
     const endLevel = () => {
         if (level === 7) endGame()
+        handleStop()
         dispatch(incrementLevel())
+        dispatch(setPlayerScore(0))
+        dispatch(setMachineScore(0))
+
+
     }
 
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
@@ -73,7 +75,7 @@ const Timer: FC<timer> = ({ scores, levelData }) => {
                 {" "}
                 <Countdown
                     ref={clockRef}
-                    date={Date.now() + 3000}
+                    date={Date.now() + 10000}
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}
@@ -85,4 +87,4 @@ const Timer: FC<timer> = ({ scores, levelData }) => {
     );
 };
 
-export default memo(Timer);
+export default memo(Timer2);

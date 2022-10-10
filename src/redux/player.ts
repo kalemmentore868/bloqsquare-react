@@ -15,6 +15,9 @@ export const playerSlice = createSlice({
     setPlayerScore: (state, action: PayloadAction<number>) => {
       return { ...state, totalPoints: action.payload };
     },
+    incrementPlayerScore: (state) => {
+      return { ...state, totalPoints: state.totalPoints + 1 };
+    },
     setPlayerColor: (state, action: PayloadAction<string>) => {
       return { ...state, chosenColor: action.payload };
     },
@@ -22,6 +25,7 @@ export const playerSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setPlayerColor, setPlayerScore } = playerSlice.actions;
+export const { setPlayerColor, setPlayerScore, incrementPlayerScore } =
+  playerSlice.actions;
 
 export default playerSlice.reducer;

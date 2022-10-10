@@ -15,6 +15,9 @@ export const machineSlice = createSlice({
     setMachineScore: (state, action: PayloadAction<number>) => {
       return { ...state, totalPoints: action.payload };
     },
+    incrementMachineScore: (state) => {
+      return { ...state, totalPoints: state.totalPoints + 1 };
+    },
     setMachineColor: (state, action: PayloadAction<string>) => {
       return { ...state, chosenColor: action.payload };
     },
@@ -22,6 +25,7 @@ export const machineSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setMachineColor, setMachineScore } = machineSlice.actions;
+export const { setMachineColor, setMachineScore, incrementMachineScore } =
+  machineSlice.actions;
 
 export default machineSlice.reducer;

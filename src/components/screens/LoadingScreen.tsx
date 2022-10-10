@@ -3,6 +3,13 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import Logo from "../Logo";
 import { useAppDispatch } from "../../redux/redux-hooks";
 import { incrementScreen } from "../../redux/screen";
+import { LevelData, setGameData } from "../../redux/gameData";
+
+interface ApiData {
+  response: {
+    data: LevelData[];
+  };
+}
 
 const LoadingScreen = () => {
   let [loading, setLoading] = useState(true);
@@ -18,14 +25,11 @@ const LoadingScreen = () => {
       "./audio/you.wav",
     ];
 
+    const response = fetchGameData()
     cacheMedia(media);
-    // someRequest().then(() => {
-    //     setLoading(false)
-    // })
+
   }, []);
-  // function someRequest() { //Simulates a request; makes a "promise" that'll run for 2.5 seconds
-  //     return new Promise<void>(resolve => setTimeout(() => resolve(), 2500));
-  // }
+
 
   const cacheMedia = async (media: string[]) => {
     const promises = await media.map((src) => {
@@ -44,6 +48,14 @@ const LoadingScreen = () => {
       setLoading(false);
     }, 2500);
   };
+
+  const fetchGameData = async () => {
+    const response = await fetch(
+      "https://run.mocky.io/v3/7510f3ce-0209-4180-9c3f-cf42bdc82db6"
+    );
+    const data: ApiData = await response.json();
+    dispatch(setGameData(data.response.data))
+  }
 
   return (
     <section className="loading-screen">

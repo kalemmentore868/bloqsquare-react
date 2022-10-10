@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  colors,
+  squareInfo,
+} from "../components/gameScreenComponents/version2/Square2";
+import Cell from "../helpers/Cell";
+import Grid2 from "../helpers/Grid2";
 
-interface LevelData {
+export interface LevelData {
   level: number;
   grid: {
     x: number;
@@ -8,43 +14,37 @@ interface LevelData {
   };
 }
 
-interface GameData {
+export interface GameData {
   levels: LevelData[];
   currentLevel: number;
-}
-async function getLevels(): Promise<LevelData[]> {
-  try {
-    const response = await fetch(
-      "https://run.mocky.io/v3/7510f3ce-0209-4180-9c3f-cf42bdc82db6"
-    );
-    const data = await response.json();
-    return data.data;
-  } catch (error) {
-    console.log(error);
-    return [{ level: 1, grid: { x: 7, y: 14 } }];
-  }
+  grid: Grid2;
 }
 
 // @ts-ignore
-const levels: LevelData[] = getLevels();
+const levels = [{ level: 1, grid: { x: 1, y: 1 } }];
 
 // Define the initial state using that type
 const initialState: GameData = {
   levels,
-  currentLevel: 1,
+  currentLevel: 0,
+  grid: new Grid2(14, 7),
 };
 
-export const gameDataSlice = createSlice({
+const gameDataSlice = createSlice({
   name: "gameData",
   initialState,
   reducers: {
     incrementLevel: (state) => {
       return { ...state, currentLevel: state.currentLevel + 1 };
     },
+    setGameData: (state, action: PayloadAction<LevelData[]>) => {
+      const { x, y } = action.payload[state.currentLevel].grid;
+      return { ...state, levels: action.payload, grid: new Grid2(x, y) };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementLevel } = gameDataSlice.actions;
+export const { incrementLevel, setGameData } = gameDataSlice.actions;
 
 export default gameDataSlice.reducer;

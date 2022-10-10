@@ -1,19 +1,24 @@
 import { FC, useRef } from 'react'
 import Grid2 from '../../helpers/Grid2'
+import { GameData } from '../../redux/gameData'
 import TableRow from './TableRow'
 
 
 interface TableRowProps {
     incrementMachineScore: Function
     incrementPlayerScore: Function
+    gameData: GameData
 }
 
 
 
-const GameBoard: FC<TableRowProps> = ({ incrementMachineScore, incrementPlayerScore }) => {
+const GameBoard: FC<TableRowProps> = ({ incrementMachineScore, incrementPlayerScore, gameData }) => {
 
 
-    const grid = useRef(new Grid2(8, 8))
+    const { levels, currentLevel } = gameData
+    const levelData = levels[currentLevel]
+    const { x, y } = levelData.grid
+    const grid = useRef(new Grid2(x, y))
 
 
 
