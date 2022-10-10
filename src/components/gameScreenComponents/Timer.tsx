@@ -37,7 +37,7 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
 
     useEffect(() => {
         let timer: number;
-
+        console.log("in timer use effect")
         setTimeout(() => {
             timer = window.setInterval(() => bgMusic.play(), 2000);
             handleStart();

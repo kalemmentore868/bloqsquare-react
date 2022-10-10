@@ -16,14 +16,14 @@ interface gameInfo {
 const GameInfo: FC<gameInfo> = ({ gameData }) => {
     const { currentLevel } = gameData
     const levelData = gameData.levels[currentLevel]
-    const { level } = levelData
+    const { level, grade } = levelData
     const player = useAppSelector(state => state.player)
     const dispatch = useAppDispatch()
     const [gamePlaying, setGamePlaying] = useState(true)
 
     useEffect(() => {
         if (!gamePlaying) {
-            if (player.totalPoints >= 5) {
+            if (player.totalPoints >= grade) {
                 dispatch(incrementLevel())
                 dispatch(setPlayerScore(0))
                 dispatch(setMachineScore(0))
@@ -32,7 +32,12 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
             }
         }
 
+
     }, [gamePlaying])
+
+    useEffect(() => {
+        setGamePlaying(true)
+    }, [level])
 
     const endfOLevel = () => {
         setGamePlaying(false)
