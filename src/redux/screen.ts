@@ -13,13 +13,13 @@ export const screenSlice = createSlice({
   name: "screen",
   initialState,
   reducers: {
-    incrementScreen: (state) => {
-      state.value + 1 > 3 ? (state.value = 1) : state.value++;
+    setScreen: (state, action: PayloadAction<number>) => {
+      state.value = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementScreen } = screenSlice.actions;
+export const { setScreen } = screenSlice.actions;
 
 export default screenSlice.reducer;

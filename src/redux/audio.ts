@@ -6,7 +6,7 @@ const timeSFx = new Howl({
   src: ["./audio/background-music.wav"],
   html5: true,
   preload: true,
-  volume: 0.25,
+  volume: 0.15,
 });
 
 const opponentFx = new Howl({

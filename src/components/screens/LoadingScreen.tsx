@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import Logo from "../Logo";
 import { useAppDispatch } from "../../redux/redux-hooks";
-import { incrementScreen } from "../../redux/screen";
+import { setScreen } from "../../redux/screen";
 import { LevelData, setGameData } from "../../redux/gameData";
 
 interface ApiData {
@@ -25,7 +25,7 @@ const LoadingScreen = () => {
       "./audio/you.wav",
     ];
 
-    const response = fetchGameData()
+    fetchGameData()
     cacheMedia(media);
 
   }, []);
@@ -77,7 +77,7 @@ const LoadingScreen = () => {
             </header>
 
             <button
-              onClick={() => dispatch(incrementScreen())}
+              onClick={() => dispatch(setScreen(1))}
               className="btn-larger  pink"
             >
               start

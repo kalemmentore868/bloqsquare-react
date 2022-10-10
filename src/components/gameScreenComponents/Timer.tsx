@@ -1,7 +1,7 @@
-import { memo, FC, useEffect, useRef } from "react";
+import { memo, FC, useEffect, useRef, useState } from "react";
 import Countdown from "react-countdown";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
-import { incrementScreen } from "../../redux/screen";
+import { setScreen } from "../../redux/screen";
 import { setMachineScore } from "../../redux/machine";
 import { setPlayerScore } from "../../redux/player";
 import { incrementLevel, LevelData } from "../../redux/gameData";
@@ -13,7 +13,7 @@ interface countdownProps {
 }
 
 interface timer {
-
+    endOfLevel: Function
     levelData: LevelData
 }
 
@@ -23,10 +23,11 @@ function areEqual(prevProps: timer, nextProps: timer) {
     }
 }
 
-const Timer: FC<timer> = ({ levelData }) => {
+const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
     const { bgMusic, endAudio } = useAppSelector((state) => state.audio);
     const dispatch = useAppDispatch();
     const { level } = levelData
+
 
     const clockRef = useRef();
     // @ts-ignore
@@ -48,9 +49,10 @@ const Timer: FC<timer> = ({ levelData }) => {
         };
     }, [level]);
 
+
     const endGame = () => {
         endAudio.play();
-        dispatch(incrementScreen());
+        dispatch(setScreen(3));
     };
 
     const endLevel = () => {
@@ -58,14 +60,9 @@ const Timer: FC<timer> = ({ levelData }) => {
             endGame()
         } else {
             handleStop()
+            endOfLevel()
 
-            dispatch(setPlayerScore(0))
-            dispatch(setMachineScore(0))
         }
-        dispatch(incrementLevel())
-
-
-
     }
 
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
@@ -86,7 +83,7 @@ const Timer: FC<timer> = ({ levelData }) => {
                 {" "}
                 <Countdown
                     ref={clockRef}
-                    date={Date.now() + 50000}
+                    date={Date.now() + 5000}
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}
@@ -99,3 +96,4 @@ const Timer: FC<timer> = ({ levelData }) => {
 };
 
 export default memo(Timer, areEqual);
+// export default Timer

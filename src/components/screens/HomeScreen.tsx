@@ -6,7 +6,7 @@ import Button from "../Button";
 import { useAppSelector, useAppDispatch } from "../../redux/redux-hooks";
 import { setPlayerColor } from "../../redux/player";
 import { setMachineColor } from "../../redux/machine";
-import { incrementScreen } from "../../redux/screen";
+import { setScreen } from "../../redux/screen";
 
 const HomeScreen = () => {
   const player = useAppSelector((state) => state.player);
@@ -29,7 +29,7 @@ const HomeScreen = () => {
   };
 
   const play = () => {
-    dispatch(incrementScreen());
+    dispatch(setScreen(2));
   };
 
   return (

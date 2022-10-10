@@ -1,15 +1,18 @@
+import { FC } from "react";
+interface scoreProps {
+    score: number
+}
 
-import { useAppSelector } from "../../redux/redux-hooks";
 
-const Score = () => {
+const Score: FC<scoreProps> = ({ score }) => {
 
-    const player = useAppSelector((state) => state.player);
+
 
     return (
         <div className="center-align col s12">
             <div className="points yellow-text silom">
                 <div>
-                    <span id="points">{player.totalPoints}</span>pts.
+                    <span id="points">{score}</span>pts.
                 </div>
             </div>
         </div>

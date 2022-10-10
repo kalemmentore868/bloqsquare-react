@@ -9,6 +9,7 @@ export interface LevelData {
     x: number;
     y: number;
   };
+  grade: number;
 }
 
 export interface GameData {
@@ -17,7 +18,7 @@ export interface GameData {
 }
 
 // @ts-ignore
-const levels = [{ level: 1, grid: { x: 1, y: 1 } }];
+const levels = [{ level: 1, grid: { x: 1, y: 1 }, grade: 40 }];
 
 // Define the initial state using that type
 const initialState: GameData = {
@@ -35,6 +36,12 @@ const gameDataSlice = createSlice({
         currentLevel: state.currentLevel === 7 ? 0 : state.currentLevel + 1,
       };
     },
+    resetLevel: (state) => {
+      return {
+        ...state,
+        currentLevel: 0,
+      };
+    },
     setGameData: (state, action: PayloadAction<LevelData[]>) => {
       return { ...state, levels: action.payload };
     },
@@ -42,6 +49,7 @@ const gameDataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementLevel, setGameData } = gameDataSlice.actions;
+export const { incrementLevel, setGameData, resetLevel } =
+  gameDataSlice.actions;
 
 export default gameDataSlice.reducer;

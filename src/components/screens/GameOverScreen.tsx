@@ -1,7 +1,8 @@
+import { resetLevel } from "../../redux/gameData";
 import { setMachineScore } from "../../redux/machine";
 import { setPlayerScore } from "../../redux/player";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
-import { incrementScreen } from "../../redux/screen";
+import { setScreen } from "../../redux/screen";
 import Button from "../Button";
 import Logo from "../Logo";
 import Versus from "../Versus";
@@ -18,9 +19,11 @@ const GameOverScreen = () => {
 
     const restartGame = () => {
 
-        dispatch(incrementScreen())
+
         dispatch(setPlayerScore(0))
         dispatch(setMachineScore(0))
+        dispatch(resetLevel())
+        dispatch(setScreen(1))
     }
 
     return (
@@ -35,7 +38,7 @@ const GameOverScreen = () => {
                     </div>
                 </header>
                 <header className="container-fluid">
-                    <h2 className="center-align heading silom">Game Over!</h2>
+                    <h2 className="center-align heading silom">You Win!</h2>
                 </header>
             </article>
             <article>
