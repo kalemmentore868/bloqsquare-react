@@ -16,32 +16,11 @@ interface gameInfo {
 const GameInfo: FC<gameInfo> = ({ gameData }) => {
     const { currentLevel } = gameData
     const levelData = gameData.levels[currentLevel]
-    const { level, grade } = levelData
+    const { level } = levelData
     const player = useAppSelector(state => state.player)
-    const dispatch = useAppDispatch()
-    const [gamePlaying, setGamePlaying] = useState(true)
-
-    useEffect(() => {
-        if (!gamePlaying) {
-            if (player.totalPoints >= grade / 5) {
-                dispatch(incrementLevel())
-                dispatch(setPlayerScore(0))
-                dispatch(setMachineScore(0))
-            } else {
-                dispatch(setScreen(4))
-            }
-        }
 
 
-    }, [gamePlaying])
 
-    useEffect(() => {
-        setGamePlaying(true)
-    }, [level])
-
-    const endfOLevel = () => {
-        setGamePlaying(false)
-    }
     return (
         <article>
             <header>
@@ -49,7 +28,7 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
             </header>
             <header className="container-fluid">
                 <div className="dashboard row">
-                    <Timer levelData={levelData} endOfLevel={endfOLevel} />
+                    <Timer levelData={levelData} playerPoints={player.totalPoints} />
                     <Score score={player.totalPoints} />
                     <Button text={`Level: ${level}`} />
                 </div>

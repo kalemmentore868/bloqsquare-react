@@ -15,12 +15,14 @@ export interface LevelData {
 export interface GameData {
   levels: LevelData[];
   currentLevel: number;
+  gameState: string;
 }
 
 // Define the initial state using that type
 const initialState: GameData = {
   levels: [],
   currentLevel: 0,
+  gameState: "start",
 };
 
 const gameDataSlice = createSlice({
@@ -42,11 +44,14 @@ const gameDataSlice = createSlice({
     setGameData: (state, action: PayloadAction<LevelData[]>) => {
       return { ...state, levels: action.payload };
     },
+    setGameState: (state, action: PayloadAction<string>) => {
+      return { ...state, gameState: action.payload };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { incrementLevel, setGameData, resetLevel } =
+export const { incrementLevel, setGameData, resetLevel, setGameState } =
   gameDataSlice.actions;
 
 export default gameDataSlice.reducer;

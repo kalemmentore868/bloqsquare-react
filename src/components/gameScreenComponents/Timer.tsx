@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { setScreen } from "../../redux/screen";
 import { setMachineScore } from "../../redux/machine";
 import { setPlayerScore } from "../../redux/player";
-import { incrementLevel, LevelData } from "../../redux/gameData";
+import { incrementLevel, LevelData, setGameState } from "../../redux/gameData";
 
 interface countdownProps {
     minutes: number;
@@ -13,7 +13,7 @@ interface countdownProps {
 }
 
 interface timer {
-    endOfLevel: Function
+    playerPoints: number
     levelData: LevelData
 }
 
@@ -23,8 +23,9 @@ function areEqual(prevProps: timer, nextProps: timer) {
     }
 }
 
-const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
+const Timer: FC<timer> = ({ levelData, playerPoints }) => {
     const { bgMusic, endAudio } = useAppSelector((state) => state.audio);
+    const { gameState } = useAppSelector(state => state.gameData)
     const dispatch = useAppDispatch();
     const { level } = levelData
 
@@ -36,11 +37,12 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
     // @ts-ignore
     const handleStop = () => clockRef.current.stop();
 
-    let time: number = Date.now() + 50000
+    let time: number = Date.now() + 30000
 
+    //for bg music
     useEffect(() => {
+
         let timer: number;
-        console.log("in timer use effect")
         setTimeout(() => {
             timer = window.setInterval(() => bgMusic.play(), 2000);
             handleStart();
@@ -48,9 +50,27 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
 
 
         return () => {
-            clearInterval(timer);
+            return clearInterval(timer);
         };
     }, [level]);
+
+    //called at the end of each level
+    useEffect(() => {
+        if (gameState === "end") {
+            handleStop()
+            if (playerPoints >= 0) {
+                if (level === 7) endGame()
+                dispatch(incrementLevel())
+                dispatch(setPlayerScore(0))
+                dispatch(setMachineScore(0))
+            } else {
+                dispatch(setScreen(4))
+            }
+            dispatch(setGameState("start"))
+        }
+
+
+    }, [gameState])
 
 
     const endGame = () => {
@@ -58,15 +78,6 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
         dispatch(setScreen(3));
     };
 
-    const endLevel = () => {
-        if (level === 7) {
-            endGame()
-        } else {
-            handleStop()
-            endOfLevel()
-
-        }
-    }
 
     const renderer = ({ minutes, seconds, milliseconds }: countdownProps) => {
         return (
@@ -90,7 +101,7 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}
-                    onComplete={endLevel}
+                    onComplete={() => dispatch(setGameState("end"))}
                     autoStart={false}
                 />
             </div>
