@@ -84,7 +84,7 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
             <div className="container-fluid">
                 <div className="row">
                     <div className="center-align col no-padding s12">
-                        <table className="board grid-8">
+                        <table className={`board grid-${x}`}>
                             <tbody>
                                 {board.map((row, i) => {
                                     return (
