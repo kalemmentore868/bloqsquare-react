@@ -1,7 +1,10 @@
 import { FC, useEffect, useState, useCallback } from 'react'
 import Grid2 from '../../helpers/Grid2'
-import { GameData } from '../../redux/gameData'
-import { useAppSelector } from '../../redux/redux-hooks'
+import { GameData, incrementLevel } from '../../redux/gameData'
+import { setMachineScore } from '../../redux/machine'
+import { setPlayerScore } from '../../redux/player'
+import { useAppSelector, useAppDispatch } from '../../redux/redux-hooks'
+import { setScreen } from '../../redux/screen'
 import TableRow from './TableRow'
 
 
@@ -13,18 +16,19 @@ interface TableRowProps {
 
 const GameBoard: FC<TableRowProps> = ({ gameData }) => {
     const { levels, currentLevel } = gameData
-    const [board, setBoard] = useState(new Grid2(7, 14).rowList)
+    const levelData = levels[currentLevel]
+    const { x, y } = levelData.grid
+    const grid = new Grid2(x, y)
+    const [board, setBoard] = useState(grid.rowList)
     const player = useAppSelector(state => state.player)
     const machine = useAppSelector(state => state.machine)
     const colors = { playerColor: player.chosenColor, machineColor: machine.chosenColor }
+    const dispatch = useAppDispatch()
 
 
-    const levelData = levels[currentLevel]
-    const { x, y } = levelData.grid
 
     useEffect(() => {
-        const board = new Grid2(x, y)
-        setBoard(board.rowList)
+        setBoard(grid.rowList)
     }, [levelData])
 
     const handleSquareClick = useCallback((rowIndex: number, squareIndex: number, playerColor: string, opponentColor: string, machineClicked: boolean) => {
@@ -67,10 +71,50 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
 
 
             handleSquareClick(rowStart, randomSquare, colors.machineColor, colors.playerColor, true)
-        }, 700 - (currentLevel * 80))
+        }, 10000 - (currentLevel * 80))
         return () => clearInterval(time)
 
     }, [handleSquareClick, levelData])
+
+    useEffect(() => {
+        let totalSquares = board.reduce((a, b) => a.concat(b), []);
+        console.log(totalSquares)
+        let numberOfTotalSquares = totalSquares.length
+        let playerSquaresCount = 0
+        let machineSquaresCount = 0
+
+
+
+        totalSquares.map(cell => {
+            if (cell.backgroundColor === player.chosenColor) playerSquaresCount++
+            if (cell.backgroundColor === machine.chosenColor) machineSquaresCount++
+
+        })
+
+        console.log("player: ", playerSquaresCount)
+        console.log("machine: ", machineSquaresCount)
+
+
+
+        if (playerSquaresCount && playerSquaresCount / numberOfTotalSquares >= 0.75) {
+            setTimeout(() => {
+                if (playerSquaresCount / numberOfTotalSquares >= 0.75) {
+                    dispatch(incrementLevel())
+                    dispatch(setPlayerScore(0))
+                    dispatch(setMachineScore(0))
+                }
+            }, 5000)
+        }
+
+        if (machineSquaresCount && machineSquaresCount / numberOfTotalSquares >= 0.75) {
+            setTimeout(() => {
+                if (machineSquaresCount / numberOfTotalSquares >= 0.75) {
+                    dispatch(setScreen(4))
+                }
+            }, 5000)
+        }
+
+    }, [board])
 
 
     function getRandomInt(min: number, max: number) {

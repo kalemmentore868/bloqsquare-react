@@ -36,7 +36,7 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
     // @ts-ignore
     const handleStop = () => clockRef.current.stop();
 
-    let time: number = Date.now() + 15000
+    let time: number = Date.now() + 50000
 
     useEffect(() => {
         let timer: number;
@@ -44,7 +44,7 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
         setTimeout(() => {
             timer = window.setInterval(() => bgMusic.play(), 2000);
             handleStart();
-        }, 150);
+        }, 300);
 
 
         return () => {
