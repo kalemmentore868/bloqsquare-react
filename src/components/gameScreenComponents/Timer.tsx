@@ -15,6 +15,8 @@ interface countdownProps {
 interface timer {
     playerPoints: number
     levelData: LevelData
+    lastLevel: number
+    countDown: number
 }
 
 function areEqual(prevProps: timer, nextProps: timer) {
@@ -23,7 +25,7 @@ function areEqual(prevProps: timer, nextProps: timer) {
     }
 }
 
-const Timer: FC<timer> = ({ levelData, playerPoints }) => {
+const Timer: FC<timer> = ({ levelData, playerPoints, lastLevel, countDown }) => {
     const { bgMusic, endAudio } = useAppSelector((state) => state.audio);
     const { gameState } = useAppSelector(state => state.gameData)
     const dispatch = useAppDispatch();
@@ -37,7 +39,6 @@ const Timer: FC<timer> = ({ levelData, playerPoints }) => {
     // @ts-ignore
     const handleStop = () => clockRef.current.stop();
 
-    let time: number = Date.now() + 30000
 
     //for bg music
     useEffect(() => {
@@ -59,7 +60,7 @@ const Timer: FC<timer> = ({ levelData, playerPoints }) => {
         if (gameState === "end") {
             handleStop()
             if (playerPoints >= 0) {
-                if (level === 7) endGame()
+                if (level === lastLevel) endGame()
                 dispatch(incrementLevel())
                 dispatch(setPlayerScore(0))
                 dispatch(setMachineScore(0))
@@ -97,7 +98,7 @@ const Timer: FC<timer> = ({ levelData, playerPoints }) => {
                 {" "}
                 <Countdown
                     ref={clockRef}
-                    date={time}
+                    date={Date.now() + countDown}
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}

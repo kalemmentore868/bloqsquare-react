@@ -37,6 +37,7 @@ const Square: FC<SquareRowProps> = ({
     const dispatch = useAppDispatch()
     const { playerMusic, opponentMusic } = useAppSelector(state => state.audio)
 
+    //increment scores based on bgColor
     useEffect(() => {
         if (cell.backgroundColor === colors.playerColor) {
             playerMusic.play()

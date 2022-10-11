@@ -3,7 +3,7 @@ import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import Logo from "../Logo";
 import { useAppDispatch } from "../../redux/redux-hooks";
 import { setScreen } from "../../redux/screen";
-import { LevelData, setGameData } from "../../redux/gameData";
+import { LevelData, setGameData, setLastLevel } from "../../redux/gameData";
 
 interface ApiData {
   response: {
@@ -56,6 +56,7 @@ const LoadingScreen = () => {
     console.log(response, process.env.REACT_APP_GAMEDATA_URL)
     const data: ApiData = await response.json();
     dispatch(setGameData(data.response.data))
+    dispatch(setLastLevel(data.response.data.length))
   }
 
   return (

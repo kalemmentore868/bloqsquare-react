@@ -1,8 +1,6 @@
 import { FC, useEffect, useState, useCallback, useRef } from 'react'
 import Grid2 from '../../helpers/Grid2'
-import { GameData, incrementLevel, setGameState } from '../../redux/gameData'
-import { setMachineScore } from '../../redux/machine'
-import { setPlayerScore } from '../../redux/player'
+import { GameData, setGameState } from '../../redux/gameData'
 import { useAppSelector, useAppDispatch } from '../../redux/redux-hooks'
 import { setScreen } from '../../redux/screen'
 import TableRow from './TableRow'
@@ -15,7 +13,8 @@ interface TableRowProps {
 
 
 const GameBoard: FC<TableRowProps> = ({ gameData }) => {
-    const { levels, currentLevel, gameState } = gameData
+    const { levels, currentLevel, gameSettings } = gameData
+    const { computerSpeed, ratioToWinROund, ratioDuration } = gameSettings
     const levelData = levels[currentLevel]
     const { x, y } = levelData.grid
     const grid = new Grid2(x, y)
@@ -73,7 +72,7 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
 
 
             handleSquareClick(rowStart, randomSquare, colors.machineColor, colors.playerColor, true)
-        }, 700 - (currentLevel * 80))
+        }, computerSpeed - (currentLevel * 80))
         return () => clearInterval(time)
 
 
@@ -98,26 +97,26 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
 
         playerRatio.current = playerSquaresCount / numberOfTotalSquares
 
-        if (playerRatio.current >= 0.75) {
+        if (playerRatio.current >= ratioToWinROund) {
             setTimeout(() => {
-                if (playerRatio.current >= 0.75) {
+                if (playerRatio.current >= ratioToWinROund) {
 
                     dispatch(setGameState("end"))
                     playerRatio.current = 0
                 }
-            }, 3000)
+            }, ratioDuration)
         }
 
         machineRatio.current = machineSquaresCount / numberOfTotalSquares
 
-        if (machineRatio.current >= 0.75) {
+        if (machineRatio.current >= ratioToWinROund) {
             setTimeout(() => {
-                if (machineRatio.current >= 0.75) {
+                if (machineRatio.current >= ratioToWinROund) {
                     dispatch(setGameState("end"))
                     dispatch(setScreen(4))
                     machineRatio.current = 0
                 }
-            }, 5000)
+            }, ratioDuration)
         }
 
     }, [board])
