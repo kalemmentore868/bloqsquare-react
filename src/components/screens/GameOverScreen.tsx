@@ -38,7 +38,7 @@ const GameOverScreen = () => {
                     </div>
                 </header>
                 <header className="container-fluid">
-                    <h2 className="center-align heading silom">You Win!</h2>
+                    <h2 className="center-align heading silom">Congratulations you've completed all levels!</h2>
                 </header>
             </article>
             <article>

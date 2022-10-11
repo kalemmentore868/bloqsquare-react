@@ -29,11 +29,14 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
     const { level } = levelData
 
 
+
     const clockRef = useRef();
     // @ts-ignore
     const handleStart = () => clockRef.current.start();
     // @ts-ignore
     const handleStop = () => clockRef.current.stop();
+
+    let time: number = Date.now() + 15000
 
     useEffect(() => {
         let timer: number;
@@ -83,7 +86,7 @@ const Timer: FC<timer> = ({ levelData, endOfLevel }) => {
                 {" "}
                 <Countdown
                     ref={clockRef}
-                    date={Date.now() + 15000}
+                    date={time}
                     intervalDelay={0}
                     precision={2}
                     renderer={renderer}
