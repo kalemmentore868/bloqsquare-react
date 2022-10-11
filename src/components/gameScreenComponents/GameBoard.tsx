@@ -67,10 +67,10 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
 
 
             handleSquareClick(rowStart, randomSquare, colors.machineColor, colors.playerColor, true)
-        }, 700)
+        }, 700 - (currentLevel * 80))
         return () => clearInterval(time)
 
-    }, [handleSquareClick])
+    }, [handleSquareClick, levelData])
 
 
     function getRandomInt(min: number, max: number) {

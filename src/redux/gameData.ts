@@ -17,12 +17,9 @@ export interface GameData {
   currentLevel: number;
 }
 
-// @ts-ignore
-const levels = [{ level: 1, grid: { x: 1, y: 1 }, grade: 40 }];
-
 // Define the initial state using that type
 const initialState: GameData = {
-  levels,
+  levels: [],
   currentLevel: 0,
 };
 

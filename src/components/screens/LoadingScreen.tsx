@@ -51,8 +51,9 @@ const LoadingScreen = () => {
 
   const fetchGameData = async () => {
     const response = await fetch(
-      "https://run.mocky.io/v3/7510f3ce-0209-4180-9c3f-cf42bdc82db6"
+      process.env.REACT_APP_GAMEDATA_URL
     );
+    console.log(response, process.env.REACT_APP_GAMEDATA_URL)
     const data: ApiData = await response.json();
     dispatch(setGameData(data.response.data))
   }
