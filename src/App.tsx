@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import React, { Suspense } from "react";
->>>>>>> enhancement
 import Help from './components/Help';
 const GameOverScreen = React.lazy(() => import("./components/screens/GameOverScreen"));
 const GameScreen = React.lazy(() => import("./components/screens/GameScreen"));
