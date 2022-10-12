@@ -27,7 +27,7 @@ const LoadingScreen = () => {
 
     fetchGameData()
     cacheMedia(media);
-    setLoading(false);
+    setLoading(false)
 
   }, []);
 

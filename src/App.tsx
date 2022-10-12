@@ -1,4 +1,3 @@
-
 import Help from './components/Help';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameScreen from './components/screens/GameScreen';
