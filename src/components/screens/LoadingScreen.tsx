@@ -44,16 +44,15 @@ const LoadingScreen = () => {
     });
 
     await Promise.all(promises);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2500);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 2500);
   };
 
   const fetchGameData = async () => {
     const response = await fetch(
       process.env.REACT_APP_GAMEDATA_URL
     );
-    console.log(response, process.env.REACT_APP_GAMEDATA_URL)
     const data: ApiData = await response.json();
     dispatch(setGameData(data.response.data))
     dispatch(setLastLevel(1))
