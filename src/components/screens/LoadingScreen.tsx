@@ -56,7 +56,7 @@ const LoadingScreen = () => {
     );
     const data: ApiData = await response.json();
     dispatch(setGameData(data.response.data))
-    dispatch(setLastLevel(1))
+    dispatch(setLastLevel(data.response.data.length))
   }
 
   return (
