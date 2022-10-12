@@ -44,7 +44,7 @@ const GameOverScreen = () => {
             <article>
                 <div className="container-fluid">
                     <div className="row">
-                        <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} playerScore={player.totalPoints} machineScore={machine.totalPoints} />
+                        <Versus colorPicked={player.chosenColor} machineColor={machine.chosenColor} playerScore={player.totalGamePoints} machineScore={machine.totalGamePoints} />
                     </div>
                     <div className="row">
                         <div className="center-align col s12">

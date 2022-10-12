@@ -1,7 +1,7 @@
 import React, { FC, useEffect, memo } from "react";
 import Cell from "../../helpers/Cell";
-import { incrementMachineScore } from "../../redux/machine";
-import { incrementPlayerScore } from "../../redux/player";
+import { incrementMachineScore, incrementTotalMachinePoints } from "../../redux/machine";
+import { incrementPlayerScore, incrementTotalPlayerPoints } from "../../redux/player";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 
 
@@ -42,9 +42,11 @@ const Square: FC<SquareRowProps> = ({
         if (cell.backgroundColor === colors.playerColor) {
             playerMusic.play()
             dispatch(incrementPlayerScore())
+            dispatch(incrementTotalPlayerPoints())
         } else if (cell.backgroundColor === colors.machineColor) {
             opponentMusic.play()
             dispatch(incrementMachineScore())
+            dispatch(incrementTotalMachinePoints())
         }
 
     }, [cell.backgroundColor]);

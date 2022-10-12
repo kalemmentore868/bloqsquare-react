@@ -5,6 +5,7 @@ import Player from "../helpers/Player";
 const initialState: Player = {
   chosenColor: "#0000FF",
   totalPoints: 0,
+  totalGamePoints: 0,
   isComputer: true,
 };
 
@@ -21,11 +22,21 @@ export const machineSlice = createSlice({
     setMachineColor: (state, action: PayloadAction<string>) => {
       return { ...state, chosenColor: action.payload };
     },
+    incrementTotalMachinePoints: (state) => {
+      return {
+        ...state,
+        totalGamePoints: state.totalGamePoints + 1,
+      };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setMachineColor, setMachineScore, incrementMachineScore } =
-  machineSlice.actions;
+export const {
+  setMachineColor,
+  setMachineScore,
+  incrementMachineScore,
+  incrementTotalMachinePoints,
+} = machineSlice.actions;
 
 export default machineSlice.reducer;

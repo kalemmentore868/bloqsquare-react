@@ -4,7 +4,7 @@ import { State } from "howler";
 export interface GameSettings {
   countDown: number;
   computerSpeed: number;
-  ratioToWinROund: number;
+  ratioToWinRound: number;
   ratioDuration: number;
   lastLevel: number;
 }
@@ -31,9 +31,9 @@ const initialState: GameData = {
   currentLevel: 0,
   gameState: "start",
   gameSettings: {
-    countDown: 30000,
-    computerSpeed: 700,
-    ratioToWinROund: 0.75,
+    countDown: 10000,
+    computerSpeed: 1200,
+    ratioToWinRound: 0.75,
     ratioDuration: 5000,
     lastLevel: 7,
   },

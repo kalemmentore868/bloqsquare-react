@@ -14,7 +14,7 @@ interface TableRowProps {
 
 const GameBoard: FC<TableRowProps> = ({ gameData }) => {
     const { levels, currentLevel, gameSettings } = gameData
-    const { computerSpeed, ratioToWinROund, ratioDuration } = gameSettings
+    const { computerSpeed, ratioToWinRound, ratioDuration } = gameSettings
     const levelData = levels[currentLevel]
     const { x, y } = levelData.grid
     const grid = new Grid2(x, y)
@@ -97,9 +97,9 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
 
         playerRatio.current = playerSquaresCount / numberOfTotalSquares
 
-        if (playerRatio.current >= ratioToWinROund) {
+        if (playerRatio.current >= ratioToWinRound) {
             setTimeout(() => {
-                if (playerRatio.current >= ratioToWinROund) {
+                if (playerRatio.current >= ratioToWinRound) {
 
                     dispatch(setGameState("end"))
                     playerRatio.current = 0
@@ -109,9 +109,9 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
 
         machineRatio.current = machineSquaresCount / numberOfTotalSquares
 
-        if (machineRatio.current >= ratioToWinROund) {
+        if (machineRatio.current >= ratioToWinRound) {
             setTimeout(() => {
-                if (machineRatio.current >= ratioToWinROund) {
+                if (machineRatio.current >= ratioToWinRound) {
                     dispatch(setGameState("end"))
                     dispatch(setScreen(4))
                     machineRatio.current = 0
