@@ -1,12 +1,14 @@
 import React, { Suspense } from "react";
 import Help from './components/Help';
-const GameOverScreen = React.lazy(() => import("./components/screens/GameOverScreen"));
-const GameScreen = React.lazy(() => import("./components/screens/GameScreen"));
-const YouLoseScreen = React.lazy(() => import("./components/screens/YouLoseScreen"));
+
 import HomeScreen from './components/screens/HomeScreen';
 import LoadingScreen from './components/screens/LoadingScreen';
 import { useAppSelector } from './redux/redux-hooks';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
+
+const GameOverScreen = React.lazy(() => import("./components/screens/GameOverScreen"));
+const GameScreen = React.lazy(() => import("./components/screens/GameScreen"));
+const YouLoseScreen = React.lazy(() => import("./components/screens/YouLoseScreen"));
 
 const Loader = () => {
   return (
