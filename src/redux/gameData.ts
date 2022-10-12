@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { State } from "howler";
+
+export interface Ratio {
+  ratioToWinRound: number;
+  ratioDuration: number;
+}
 
 export interface GameSettings {
   countDown: number;
   computerSpeed: number;
-  ratioToWinRound: number;
-  ratioDuration: number;
+  ratio: Ratio;
   lastLevel: number;
 }
 
@@ -33,8 +36,7 @@ const initialState: GameData = {
   gameSettings: {
     countDown: 10000,
     computerSpeed: 1200,
-    ratioToWinRound: 0.75,
-    ratioDuration: 5000,
+    ratio: { ratioToWinRound: 0.75, ratioDuration: 5000 },
     lastLevel: 7,
   },
 };
@@ -70,6 +72,33 @@ const gameDataSlice = createSlice({
         },
       };
     },
+    setCountDown: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        gameSettings: {
+          ...state.gameSettings,
+          countDown: action.payload,
+        },
+      };
+    },
+    setComputerSpeed: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        gameSettings: {
+          ...state.gameSettings,
+          computerSpeed: action.payload,
+        },
+      };
+    },
+    setRatio: (state, action: PayloadAction<Ratio>) => {
+      return {
+        ...state,
+        gameSettings: {
+          ...state.gameSettings,
+          ratio: action.payload,
+        },
+      };
+    },
   },
 });
 
@@ -80,6 +109,9 @@ export const {
   resetLevel,
   setGameState,
   setLastLevel,
+  setComputerSpeed,
+  setCountDown,
+  setRatio,
 } = gameDataSlice.actions;
 
 export default gameDataSlice.reducer;

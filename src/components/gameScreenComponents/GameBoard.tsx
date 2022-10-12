@@ -14,11 +14,11 @@ interface TableRowProps {
 
 const GameBoard: FC<TableRowProps> = ({ gameData }) => {
     const { levels, currentLevel, gameSettings } = gameData
-    const { computerSpeed, ratioToWinRound, ratioDuration } = gameSettings
+    const { computerSpeed, ratio } = gameSettings
+    const { ratioToWinRound, ratioDuration } = ratio
     const levelData = levels[currentLevel]
     const { x, y } = levelData.grid
-    const grid = new Grid2(x, y)
-    const [board, setBoard] = useState(grid.rowList)
+    const [board, setBoard] = useState(new Grid2(x, y).rowList)
     const player = useAppSelector(state => state.player)
     const machine = useAppSelector(state => state.machine)
     const colors = { playerColor: player.chosenColor, machineColor: machine.chosenColor }
@@ -28,7 +28,7 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
 
 
     useEffect(() => {
-        setBoard(grid.rowList)
+        setBoard(new Grid2(x, y).rowList)
     }, [levelData])
 
     const handleSquareClick = useCallback((rowIndex: number, squareIndex: number, playerColor: string, opponentColor: string, machineClicked: boolean) => {

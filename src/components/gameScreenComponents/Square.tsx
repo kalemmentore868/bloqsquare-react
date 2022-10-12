@@ -58,7 +58,7 @@ const Square: FC<SquareRowProps> = ({
             dispatch(incrementTotalPlayerPoints())
         } else if (cell.backgroundColor === colors.machineColor) {
             opponentSfx.play()
-            dispatch(incrementMachineScore())
+            // dispatch(incrementMachineScore())
             dispatch(incrementTotalMachinePoints())
         }
 

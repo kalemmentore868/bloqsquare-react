@@ -7,12 +7,22 @@ import { useAppSelector, useAppDispatch } from "../../redux/redux-hooks";
 import { setPlayerColor } from "../../redux/player";
 import { setMachineColor } from "../../redux/machine";
 import { setScreen } from "../../redux/screen";
+// import { setComputerSpeed, setCountDown, setRatio } from "../../redux/gameData";
+
 
 const HomeScreen = () => {
   const player = useAppSelector((state) => state.player);
   const machine = useAppSelector((state) => state.machine);
-
   const dispatch = useAppDispatch();
+
+  //Function to make it easy to adjust game settings
+  // const setUpGame = (timerCountdown: number, computerSpeed: number, ratio = { ratioToWinRound: 0.75, ratioDuration: 5000 }
+  // ) => {
+  //   dispatch(setCountDown(timerCountdown))
+  //   dispatch(setComputerSpeed(computerSpeed))
+  //   dispatch(setRatio(ratio))
+  // }
+
 
   function invertHex(hex: string) {
     hex = hex.substring(1);

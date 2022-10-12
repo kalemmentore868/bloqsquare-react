@@ -78,7 +78,7 @@ const Timer: FC<timer> = ({ levelData, playerPoints, lastLevel, countDown }) => 
                 if (level === lastLevel) endGame()
                 dispatch(incrementLevel())
                 dispatch(setPlayerScore(0))
-                dispatch(setMachineScore(0))
+                // dispatch(setMachineScore(0))
             } else {
                 dispatch(setScreen(4))
             }

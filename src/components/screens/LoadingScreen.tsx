@@ -56,7 +56,7 @@ const LoadingScreen = () => {
     console.log(response, process.env.REACT_APP_GAMEDATA_URL)
     const data: ApiData = await response.json();
     dispatch(setGameData(data.response.data))
-    dispatch(setLastLevel(data.response.data.length))
+    dispatch(setLastLevel(1))
   }
 
   return (
