@@ -1,45 +1,26 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { Howl } from "howler";
+const timeSfxPath = "./audio/background-music.wav";
 
-const timeSFx = new Howl({
-  src: ["./audio/background-music.wav"],
-  html5: true,
-  preload: true,
-  volume: 0.15,
-});
+const opponentSfxPath = "./audio/opponent.wav";
 
-const opponentFx = new Howl({
-  src: ["./audio/opponent.wav"],
-  html5: true,
-  preload: true,
-});
-const youFx = new Howl({
-  src: ["./audio/you.wav"],
-  html5: true,
-  preload: true,
-  volume: 1,
-});
+const youSfxPath = "./audio/you.wav";
 
-const endAudio = new Howl({
-  src: ["./audio/end.wav"],
-  html5: true,
-  preload: true,
-});
+const endAudioPath = "./audio/end.wav";
 
 interface AudioState {
-  bgMusic: Howl;
-  opponentMusic: Howl;
-  playerMusic: Howl;
-  endAudio: Howl;
+  youSfxPath: string;
+  opponentSfxPath: string;
+  endAudioPath: string;
+  timeSfxPath: string;
 }
 
 // Define the initial state using that type
 const initialState: AudioState = {
-  bgMusic: timeSFx,
-  opponentMusic: opponentFx,
-  playerMusic: youFx,
-  endAudio,
+  youSfxPath,
+  opponentSfxPath,
+  timeSfxPath,
+  endAudioPath,
 };
 
 export const audioSlice = createSlice({

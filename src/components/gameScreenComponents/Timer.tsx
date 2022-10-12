@@ -1,10 +1,11 @@
-import { memo, FC, useEffect, useRef, useState } from "react";
+import { memo, FC, useEffect, useRef } from "react";
 import Countdown from "react-countdown";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
 import { setScreen } from "../../redux/screen";
 import { setMachineScore } from "../../redux/machine";
 import { setPlayerScore } from "../../redux/player";
 import { incrementLevel, LevelData, setGameState } from "../../redux/gameData";
+import { Howl } from "howler";
 
 interface countdownProps {
     minutes: number;
@@ -26,7 +27,21 @@ function areEqual(prevProps: timer, nextProps: timer) {
 }
 
 const Timer: FC<timer> = ({ levelData, playerPoints, lastLevel, countDown }) => {
-    const { bgMusic, endAudio } = useAppSelector((state) => state.audio);
+    const { timeSfxPath, endAudioPath } = useAppSelector((state) => state.audio);
+
+    const bgMusic = new Howl({
+        src: [timeSfxPath],
+        preload: true,
+        volume: 0.15,
+    });
+
+    const endAudio = new Howl({
+        src: [endAudioPath],
+        preload: true,
+        volume: 0.15,
+    });
+
+
     const { gameState } = useAppSelector(state => state.gameData)
     const dispatch = useAppDispatch();
     const { level } = levelData

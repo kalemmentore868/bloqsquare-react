@@ -3,6 +3,7 @@ import Cell from "../../helpers/Cell";
 import { incrementMachineScore, incrementTotalMachinePoints } from "../../redux/machine";
 import { incrementPlayerScore, incrementTotalPlayerPoints } from "../../redux/player";
 import { useAppDispatch, useAppSelector } from "../../redux/redux-hooks";
+import { Howl } from "howler";
 
 
 
@@ -35,16 +36,28 @@ const Square: FC<SquareRowProps> = ({
 
 }) => {
     const dispatch = useAppDispatch()
-    const { playerMusic, opponentMusic } = useAppSelector(state => state.audio)
+    const { youSfxPath, opponentSfxPath } = useAppSelector(state => state.audio)
+    const youSfx = new Howl({
+        src: [youSfxPath],
+        preload: true,
+        volume: 1,
+    });
+
+    const opponentSfx = new Howl({
+        src: [opponentSfxPath],
+        preload: true,
+        volume: 1,
+    });
+
 
     //increment scores based on bgColor
     useEffect(() => {
         if (cell.backgroundColor === colors.playerColor) {
-            playerMusic.play()
+            youSfx.play()
             dispatch(incrementPlayerScore())
             dispatch(incrementTotalPlayerPoints())
         } else if (cell.backgroundColor === colors.machineColor) {
-            opponentMusic.play()
+            opponentSfx.play()
             dispatch(incrementMachineScore())
             dispatch(incrementTotalMachinePoints())
         }
