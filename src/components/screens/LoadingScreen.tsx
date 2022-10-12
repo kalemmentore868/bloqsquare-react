@@ -27,6 +27,7 @@ const LoadingScreen = () => {
 
     fetchGameData()
     cacheMedia(media);
+    setLoading(false);
 
   }, []);
 
@@ -44,6 +45,7 @@ const LoadingScreen = () => {
     });
 
     await Promise.all(promises);
+
     // setTimeout(() => {
     //   setLoading(false);
     // }, 2500);
