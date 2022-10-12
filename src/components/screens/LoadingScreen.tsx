@@ -51,12 +51,23 @@ const LoadingScreen = () => {
   };
 
   const fetchGameData = async () => {
-    const response = await fetch(
-      process.env.REACT_APP_GAMEDATA_URL
-    );
-    const data: ApiData = await response.json();
-    dispatch(setGameData(data.response.data))
-    dispatch(setLastLevel(data.response.data.length))
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_GAMEDATA_URL
+      );
+      const data: ApiData = await response.json();
+      let levels = data.response.data
+      dispatch(setGameData(levels))
+      dispatch(setLastLevel(levels.length))
+      localStorage.setItem("levels", JSON.stringify(levels))
+
+    } catch (error) {
+      let levelsString = localStorage.getItem("levels");
+      let levels = JSON.parse(levelsString)
+      dispatch(setGameData(levels))
+      dispatch(setLastLevel(levels.length))
+    }
+
   }
 
   return (
