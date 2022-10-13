@@ -3,7 +3,6 @@ import { GameData } from "../../redux/gameData";
 import Logo from "../Logo";
 import Score from "./Score";
 import Timer from "./Timer";
-import Button from "../Button"
 import { useAppSelector } from "../../redux/redux-hooks";
 import Level from "../Level";
 
