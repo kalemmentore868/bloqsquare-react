@@ -40,13 +40,13 @@ const Square: FC<SquareRowProps> = ({
     const youSfx = new Howl({
         src: [youSfxPath],
         preload: true,
-        volume: 1,
+        volume: 0.5,
     });
 
     const opponentSfx = new Howl({
         src: [opponentSfxPath],
         preload: true,
-        volume: 1,
+        volume: 0.5,
     });
 
 

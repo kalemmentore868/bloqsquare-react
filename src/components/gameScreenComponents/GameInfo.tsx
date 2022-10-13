@@ -5,6 +5,7 @@ import Score from "./Score";
 import Timer from "./Timer";
 import Button from "../Button"
 import { useAppSelector } from "../../redux/redux-hooks";
+import Level from "../Level";
 
 
 interface gameInfo {
@@ -29,9 +30,9 @@ const GameInfo: FC<gameInfo> = ({ gameData }) => {
                 <div className="dashboard row">
                     <Timer levelData={levelData} lastLevel={lastLevel} countDown={countDown} playerPoints={player.totalPoints} />
                     <Score score={player.totalPoints} />
-                    <Button text={`Level: ${level}`} />
                 </div>
             </header>
+            <Level level={levelData.level} />
         </article>
     );
 };

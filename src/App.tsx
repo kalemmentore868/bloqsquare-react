@@ -5,6 +5,7 @@ import HomeScreen from './components/screens/HomeScreen';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { LevelData, setGameData, setLastLevel } from './redux/gameData';
 import { useAppDispatch, useAppSelector } from './redux/redux-hooks';
+import Settings from './components/Settings';
 const GameScreen = lazy(() => import('./components/screens/GameScreen'));
 const GameOverScreen = lazy(() => import('./components/screens/GameOverScreen'));
 const YouLoseScreen = lazy(() => import('./components/screens/YouLoseScreen'));
@@ -20,6 +21,7 @@ function App() {
 
 
   const { screen } = useAppSelector((state) => state)
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -77,8 +79,10 @@ function App() {
         {screen.value === 3 && <GameOverScreen />}
         {screen.value === 4 && <YouLoseScreen />}
       </Suspense>
-      <InstallPWA />
+
+      {/* <InstallPWA /> */}
       <Help />
+      <Settings />
     </main>
 
   );
