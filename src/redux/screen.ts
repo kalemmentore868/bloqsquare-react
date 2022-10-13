@@ -6,7 +6,7 @@ interface Screen {
 
 // Define the initial state using that type
 const initialState: Screen = {
-  value: 0,
+  value: 1,
 };
 
 export const screenSlice = createSlice({
