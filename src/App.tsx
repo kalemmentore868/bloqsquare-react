@@ -1,4 +1,5 @@
 import Help from './components/Help';
+import InstallPWA from './components/InstallPwa';
 import GameOverScreen from './components/screens/GameOverScreen';
 import GameScreen from './components/screens/GameScreen';
 import HomeScreen from './components/screens/HomeScreen';
@@ -19,6 +20,7 @@ function App() {
       {screen.value === 2 && <GameScreen />}
       {screen.value === 3 && <GameOverScreen />}
       {screen.value === 4 && <YouLoseScreen />}
+      <InstallPWA />
       <Help />
     </main>
 

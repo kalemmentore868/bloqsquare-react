@@ -5256,6 +5256,49 @@ main > section {
   display: flex;
 }
 
+.button-7 {
+  background-color: #e91e63;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.15385;
+  text-transform: uppercase;
+  margin: 0;
+  outline: none;
+  padding: 8px 0.8em;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-7:hover,
+.button-7:focus {
+  background-color: #ff4742;
+}
+
+.button-7:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, 0.15);
+}
+
+.button-7:active {
+  background-color: #0064bd;
+  box-shadow: none;
+}
+
 @media screen and (min-width: 320px) {
   h2 {
     font-size: 2rem;
