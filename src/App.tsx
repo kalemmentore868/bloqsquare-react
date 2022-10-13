@@ -1,10 +1,7 @@
 import { Suspense, useEffect, lazy, CSSProperties } from 'react';
 import Help from './components/Help';
 import InstallPWA from './components/InstallPwa';
-// import GameOverScreen from './components/screens/GameOverScreen';
-// import GameScreen from './components/screens/GameScreen';
 import HomeScreen from './components/screens/HomeScreen';
-// import YouLoseScreen from './components/screens/YouLoseScreen';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { LevelData, setGameData, setLastLevel } from './redux/gameData';
 import { useAppDispatch, useAppSelector } from './redux/redux-hooks';

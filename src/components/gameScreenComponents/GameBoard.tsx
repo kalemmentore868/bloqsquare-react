@@ -4,6 +4,7 @@ import { GameData, setGameState } from '../../redux/gameData'
 import { useAppSelector, useAppDispatch } from '../../redux/redux-hooks'
 import { setScreen } from '../../redux/screen'
 import TableRow from './TableRow'
+import { isMobile } from 'react-device-detect';
 
 
 interface TableRowProps {
@@ -14,7 +15,7 @@ interface TableRowProps {
 
 const GameBoard: FC<TableRowProps> = ({ gameData }) => {
     const { levels, currentLevel, gameSettings } = gameData
-    const { computerSpeed, ratio } = gameSettings
+    let { computerSpeed, ratio } = gameSettings
     const { ratioToWinRound, ratioDuration } = ratio
     const levelData = levels[currentLevel]
     const { x, y } = levelData.grid
@@ -25,6 +26,8 @@ const GameBoard: FC<TableRowProps> = ({ gameData }) => {
     const dispatch = useAppDispatch()
     const playerRatio = useRef(0)
     const machineRatio = useRef(0)
+
+    if (isMobile) computerSpeed = computerSpeed / 2
 
 
     useEffect(() => {
