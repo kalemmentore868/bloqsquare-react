@@ -1,14 +1,16 @@
-import { useEffect, lazy, Suspense, CSSProperties } from 'react';
+import { useEffect } from 'react';
 import Help from './components/Help';
 import InstallPWA from './components/InstallPwa';
-
+import GameOverScreen from './components/screens/GameOverScreen';
+import GameScreen from './components/screens/GameScreen';
 import HomeScreen from './components/screens/HomeScreen';
+import YouLoseScreen from './components/screens/YouLoseScreen';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { LevelData, setGameData, setLastLevel } from './redux/gameData';
 import { useAppDispatch, useAppSelector } from './redux/redux-hooks';
-const GameScreen = lazy(() => import('./components/screens/GameScreen'));
-const GameOverScreen = lazy(() => import('./components/screens/GameOverScreen'));
-const YouLoseScreen = lazy(() => import('./components/screens/YouLoseScreen'));
+// const GameScreen = lazy(() => import('./components/screens/GameScreen'));
+// const GameOverScreen = lazy(() => import('./components/screens/GameOverScreen'));
+// const YouLoseScreen = lazy(() => import('./components/screens/YouLoseScreen'));
 
 
 interface ApiData {
@@ -50,15 +52,15 @@ function App() {
     }
   }
 
-  const override: CSSProperties = {
-    position: "absolute",
-    marginLeft: "auto",
-    marginRight: "auto",
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    width: "100%"
-  };
+  // const override: CSSProperties = {
+  //   position: "absolute",
+  //   marginLeft: "auto",
+  //   marginRight: "auto",
+  //   left: 0,
+  //   right: 0,
+  //   textAlign: "center",
+  //   width: "100%"
+  // };
 
 
 
@@ -67,17 +69,17 @@ function App() {
     <main className="App container valign-wrapper">
 
       {screen.value === 1 && <HomeScreen />}
-      <Suspense fallback={<ClimbingBoxLoader
+      {/* <Suspense fallback={<ClimbingBoxLoader
         color="#d500f9"
         loading
         size={50}
         aria-label="Loading Spinner"
         cssOverride={override}
-      />}>
-        {screen.value === 2 && <GameScreen />}
-        {screen.value === 3 && <GameOverScreen />}
-        {screen.value === 4 && <YouLoseScreen />}
-      </Suspense>
+      />}> */}
+      {screen.value === 2 && <GameScreen />}
+      {screen.value === 3 && <GameOverScreen />}
+      {screen.value === 4 && <YouLoseScreen />}
+      {/* </Suspense> */}
       <InstallPWA />
       <Help />
     </main>
