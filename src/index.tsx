@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import store from './redux/store'
 import { Provider } from 'react-redux'
-import swDec from "./swDev"
 import swDev from './swDev';
 
 const root = ReactDOM.createRoot(
