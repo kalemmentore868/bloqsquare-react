@@ -30,7 +30,7 @@ function App() {
     try {
       const response = await fetch(process.env.REACT_APP_GAMEDATA_URL);
       const data: ApiData = await response.json();
-      let levels = data.response.data;
+      let levels = data.response.data.sort((a,b) => a.level-b.level);
 
       dispatch(setGameData(levels));
       dispatch(setLastLevel(levels.length));
